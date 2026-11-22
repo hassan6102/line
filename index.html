@@ -826,8 +826,6 @@ service cloud.firestore {
       collection,
       addDoc,
       onSnapshot,
-      query,
-      orderBy,
       doc,
       getDoc,
       setDoc,
@@ -877,8 +875,6 @@ service cloud.firestore {
     // =====================================================================
     const DEFAULT_GMAPS_URL = "https://www.google.com/maps/search/?api=1&query=LINE+UP+Physiotherapy+Clinic";
     const DEFAULT_ADMIN_PIN = "1234";
-    const LOCAL_SETTINGS_KEY = "lineup_clinic_settings_v1";
-    const LOCAL_FEEDBACKS_KEY = "lineup_clinic_feedbacks_v1";
 
     const I18N = {
       ar: {
@@ -1091,33 +1087,44 @@ service cloud.firestore {
     };
 
     // =====================================================================
-    // 6. FIRESTORE CONNECTION STATUS, TIMEOUTS & LOCAL FALLBACK CACHE
+    // 5. POLISHED TOAST NOTIFICATIONS (NEVER USES browser alert())
     // =====================================================================
-    function withTimeout(promise, ms = 5000) {
+    function showToast(message, type = "info") {
+      if (!els.toastContainer) return;
+
+      const styles = {
+        success: "bg-emerald-700 text-white border-emerald-500/40",
+        error: "bg-rose-700 text-white border-rose-500/40",
+        info: "bg-navy-900 text-white border-white/15"
+      };
+
+      const toast = document.createElement("div");
+      toast.className = `pointer-events-auto max-w-sm w-full sm:w-auto px-4 py-3 rounded-2xl border shadow-xl text-xs sm:text-sm font-bold text-center transition-all duration-300 animate-fade-up ${styles[type] || styles.info}`;
+      toast.textContent = message;
+
+      els.toastContainer.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.add("opacity-0", "-translate-y-2");
+        setTimeout(() => {
+          if (toast.parentNode) toast.parentNode.removeChild(toast);
+        }, 280);
+      }, 3200);
+    }
+
+    // =====================================================================
+    // 6. FIRESTORE CONNECTION STATUS, TIMEOUTS & REAL-TIME SYNC
+    // =====================================================================
+    function withTimeout(promise, ms = 10000) {
       let timerId;
       const timeoutPromise = new Promise((_, reject) => {
         timerId = setTimeout(() => {
-          const err = new Error("Firestore request timed out (client offline or database not created yet).");
+          const err = new Error("Firestore request timed out (client offline or unreachable).");
           err.code = "unavailable";
           reject(err);
         }, ms);
       });
       return Promise.race([promise, timeoutPromise]).finally(() => clearTimeout(timerId));
-    }
-
-    function readLocalJson(key, fallback) {
-      try {
-        const raw = localStorage.getItem(key);
-        return raw ? JSON.parse(raw) : fallback;
-      } catch (_) {
-        return fallback;
-      }
-    }
-
-    function writeLocalJson(key, value) {
-      try {
-        localStorage.setItem(key, JSON.stringify(value));
-      } catch (_) {}
     }
 
     function isOfflineOrUnavailableError(err) {
@@ -1145,10 +1152,10 @@ service cloud.firestore {
         els.firebaseStatusBadge.className =
           "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/25 text-amber-200 border border-amber-400/40";
         els.firebaseStatusBadge.innerHTML =
-          '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><span>وضع محلي (Firestore غير متصل)</span>';
+          '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><span>وضع مؤقت (Firestore غير متصل)</span>';
         els.firestoreErrorAlert.classList.remove("hidden");
-        els.firestoreErrorTitle.textContent = "تعذر الاتصال بـ Firestore (العمل بالوضع المحلي مؤقتاً)";
-        els.firestoreErrorText.innerHTML = `تأكد من خطوتين في حسابك على <strong class="font-latin">Firebase Console</strong> لمشروع <code class="font-latin font-bold">maps-9dcd4</code>: (1) الدخول إلى <strong>Build &gt; Firestore Database</strong> والضغط على <strong>Create database</strong> إذا لم تكن قد أنشأتها بعد، (2) التأكد من قواعد الأمان (<strong>Rules</strong>) التالية:`;
+        els.firestoreErrorTitle.textContent = "تعذر الاتصال بـ Firestore حالياً";
+        els.firestoreErrorText.innerHTML = `تأكد من اتصال الإنترنت ومن قواعد الأمان (<strong>Rules</strong>) داخل <strong class="font-latin">Firebase Console</strong> لمشروع <code class="font-latin font-bold">maps-9dcd4</code>:`;
       } else {
         state.firestoreOnline = false;
         els.firebaseStatusBadge.className =
@@ -1157,20 +1164,11 @@ service cloud.firestore {
           '<span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span><span>خطأ صلاحيات Firestore</span>';
         els.firestoreErrorAlert.classList.remove("hidden");
         els.firestoreErrorTitle.textContent = "تنبيه صلاحيات قاعدة بيانات Firebase (Firestore Rules)";
-        els.firestoreErrorText.innerHTML = `تعذر الوصول إلى قاعدة البيانات (${errorDetail ? `<code class="font-latin font-bold">${escapeHtml(errorDetail)}</code>` : "permission-denied"}). تأكد من تفعيل <strong>Firestore Database</strong> في مشروع <code class="font-latin font-bold">maps-9dcd4</code> ووضع القواعد التالية في تبويب <strong>Rules</strong>:`;
+        els.firestoreErrorText.innerHTML = `تم رفض الوصول إلى قاعدة البيانات (${errorDetail ? `<code class="font-latin font-bold">${escapeHtml(errorDetail)}</code>` : "permission-denied"}). افتح تبويب <strong>Rules</strong> في Firestore داخل مشروع <code class="font-latin font-bold">maps-9dcd4</code> والصق القواعد التالية ثم اضغط <strong>Publish</strong>:`;
       }
     }
 
-    async function loadClinicSettings(timeoutMs = 5000) {
-      // 1. Hydrate immediately from local cache so UI is never blocked
-      const cached = readLocalJson(LOCAL_SETTINGS_KEY, null);
-      if (cached) {
-        state.settings.googleMapsUrl = cached.googleMapsUrl || DEFAULT_GMAPS_URL;
-        state.settings.adminPin = cached.adminPin ? String(cached.adminPin) : DEFAULT_ADMIN_PIN;
-        syncSettingsToUI();
-      }
-
-      // 2. Sync live settings from Firestore with timeout protection
+    async function loadClinicSettings(timeoutMs = 10000) {
       try {
         const settingsRef = doc(db, "settings", "clinic");
         const snap = await withTimeout(getDoc(settingsRef), timeoutMs);
@@ -1179,14 +1177,13 @@ service cloud.firestore {
           const data = snap.data();
           state.settings.googleMapsUrl = data.googleMapsUrl || DEFAULT_GMAPS_URL;
           state.settings.adminPin = data.adminPin ? String(data.adminPin) : DEFAULT_ADMIN_PIN;
-          writeLocalJson(LOCAL_SETTINGS_KEY, state.settings);
         }
 
         syncSettingsToUI();
         setConnectionStatus("online");
       } catch (err) {
         if (isOfflineOrUnavailableError(err)) {
-          console.warn("Firestore offline/unavailable while loading settings; using local cache.", err.code || err.message);
+          console.warn("Firestore offline/unavailable while loading settings:", err.code || err.message);
           setConnectionStatus("offline", err.code || err.message);
         } else {
           console.warn("Firestore permission error while loading settings:", err.code || err.message);
@@ -1205,28 +1202,20 @@ service cloud.firestore {
         state.snapshotWatchdog = null;
       }
 
-      // Show any locally cached feedbacks immediately while Firestore connects
-      const localList = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
-      if (localList.length > 0) {
-        state.feedbacks = localList;
-        renderAdminDashboard();
-      }
-
       let receivedServerSnapshot = false;
 
-      // Watchdog: if Firestore never replies (e.g., DB not created yet or offline), stop loading spinner cleanly
+      // Watchdog: if Firestore doesn't respond within 10s, render current in-memory items cleanly
       state.snapshotWatchdog = setTimeout(() => {
         if (!receivedServerSnapshot) {
           setConnectionStatus("offline");
-          state.feedbacks = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
           renderAdminDashboard();
         }
-      }, 6000);
+      }, 10000);
 
       try {
-        const q = query(collection(db, "feedbacks"), orderBy("createdAt", "desc"));
+        const feedbacksCol = collection(db, "feedbacks");
         state.unsubFeedbacks = onSnapshot(
-          q,
+          feedbacksCol,
           (snapshot) => {
             receivedServerSnapshot = true;
             if (state.snapshotWatchdog) {
@@ -1237,11 +1226,13 @@ service cloud.firestore {
             snapshot.forEach((docSnap) => {
               list.push({ id: docSnap.id, ...docSnap.data() });
             });
+            // Sort newest first in JS memory to avoid index or pending-timestamp issues
+            list.sort((a, b) => {
+              const tA = parseTimestamp(a.createdAt)?.getTime() || Date.now();
+              const tB = parseTimestamp(b.createdAt)?.getTime() || Date.now();
+              return tB - tA;
+            });
             state.feedbacks = list;
-            writeLocalJson(LOCAL_FEEDBACKS_KEY, list.map((item) => ({
-              ...item,
-              createdAt: parseTimestamp(item.createdAt)?.toISOString() || new Date().toISOString()
-            })));
             setConnectionStatus("online");
             renderAdminDashboard();
           },
@@ -1253,14 +1244,12 @@ service cloud.firestore {
             }
             console.warn("Firestore onSnapshot error:", error.code || error.message);
             setConnectionStatus(isOfflineOrUnavailableError(error) ? "offline" : "permission", error.code || error.message);
-            state.feedbacks = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
             renderAdminDashboard();
           }
         );
       } catch (err) {
         console.warn("Failed to attach Firestore listener:", err.code || err.message);
         setConnectionStatus(isOfflineOrUnavailableError(err) ? "offline" : "permission", err.code || err.message);
-        state.feedbacks = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
         renderAdminDashboard();
       }
     }
@@ -1386,23 +1375,20 @@ service cloud.firestore {
 
       try {
         try {
-          await withTimeout(addDoc(collection(db, "feedbacks"), payload), 5500);
+          await withTimeout(addDoc(collection(db, "feedbacks"), payload), 10000);
           setConnectionStatus("online");
         } catch (fbErr) {
-          console.warn("Firestore write unavailable; saving locally as fallback:", fbErr.code || fbErr.message);
-          // Fallback to local storage so the patient experience never breaks even if offline
-          const localList = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
-          localList.unshift({
-            id: `local_${Date.now()}`,
+          console.warn("Firestore write failed:", fbErr.code || fbErr.message);
+          // Keep entry in session memory so the patient flow completes gracefully
+          state.feedbacks.unshift({
+            id: `temp_${Date.now()}`,
             rating: payload.rating,
             comment: payload.comment,
             patientName: payload.patientName,
             patientPhone: payload.patientPhone,
             resolved: false,
-            createdAt: new Date().toISOString(),
-            _localOnly: true
+            createdAt: new Date().toISOString()
           });
-          writeLocalJson(LOCAL_FEEDBACKS_KEY, localList);
           setConnectionStatus(isOfflineOrUnavailableError(fbErr) ? "offline" : "permission", fbErr.code || fbErr.message);
         }
 
@@ -1741,16 +1727,15 @@ service cloud.firestore {
       if (!target) return;
       const nextResolved = !Boolean(target.resolved);
 
-      if (String(id).startsWith("local_") || !state.firestoreOnline) {
+      if (String(id).startsWith("temp_") || !state.firestoreOnline) {
         target.resolved = nextResolved;
-        writeLocalJson(LOCAL_FEEDBACKS_KEY, state.feedbacks);
         renderAdminDashboard();
         showToast(nextResolved ? "تم التحديد كـ تمت المتابعة ✅" : "تم التحديث إلى قيد المتابعة", "success");
         return;
       }
 
       try {
-        await withTimeout(updateDoc(doc(db, "feedbacks", id), { resolved: nextResolved }), 5000);
+        await withTimeout(updateDoc(doc(db, "feedbacks", id), { resolved: nextResolved }), 8000);
         showToast(nextResolved ? "تم التحديد كـ تمت المتابعة ✅" : "تم التحديث إلى قيد المتابعة", "success");
       } catch (err) {
         console.warn("Failed to update feedback:", err.code || err.message);
@@ -1773,16 +1758,15 @@ service cloud.firestore {
       if (!id) return;
       closeDeleteModal();
 
-      if (String(id).startsWith("local_") || !state.firestoreOnline) {
+      if (String(id).startsWith("temp_") || !state.firestoreOnline) {
         state.feedbacks = state.feedbacks.filter((f) => f.id !== id);
-        writeLocalJson(LOCAL_FEEDBACKS_KEY, state.feedbacks);
         renderAdminDashboard();
         showToast("تم حذف التقييم بنجاح", "success");
         return;
       }
 
       try {
-        await withTimeout(deleteDoc(doc(db, "feedbacks", id)), 5000);
+        await withTimeout(deleteDoc(doc(db, "feedbacks", id)), 8000);
         showToast("تم حذف التقييم بنجاح", "success");
       } catch (err) {
         console.warn("Failed to delete feedback:", err.code || err.message);
@@ -1837,10 +1821,8 @@ service cloud.firestore {
       els.saveSettingsBtn.disabled = true;
       els.saveSettingsBtn.textContent = "جاري الحفظ...";
 
-      // Always persist locally first so changes apply immediately
       state.settings.googleMapsUrl = gmaps;
       state.settings.adminPin = pin;
-      writeLocalJson(LOCAL_SETTINGS_KEY, state.settings);
       syncSettingsToUI();
 
       try {
@@ -1854,7 +1836,7 @@ service cloud.firestore {
             },
             { merge: true }
           ),
-          5000
+          8000
         );
 
         setConnectionStatus("online");
@@ -1862,7 +1844,7 @@ service cloud.firestore {
       } catch (err) {
         console.warn("Failed to save settings to Firestore:", err.code || err.message);
         setConnectionStatus(isOfflineOrUnavailableError(err) ? "offline" : "permission", err.code || err.message);
-        showToast("تم الحفظ محلياً مؤقتاً — راجع إعدادات Firestore بالأعلى", "info");
+        showToast("تعذر الحفظ في Firebase — راجع تبويب Rules في Firestore", "error");
       } finally {
         els.saveSettingsBtn.disabled = false;
         els.saveSettingsBtn.textContent = "حفظ الإعدادات في Firebase";
@@ -2030,8 +2012,7 @@ service cloud.firestore {
       // Admin PIN Modal Events
       els.pinLoginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        // Quick non-blocking refresh (max 1.5s) so PIN login stays snappy even if offline
-        await loadClinicSettings(1500);
+        await loadClinicSettings(2500);
         const enteredPin = els.pinInput.value.trim();
         const validPin = String(state.settings.adminPin || DEFAULT_ADMIN_PIN);
 
