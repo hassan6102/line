@@ -5,36 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LINE UP | عيادة العلاج الطبيعي والتأهيل - تقييم الجلسة</title>
 
-  <!-- Google Fonts: Cairo for Arabic & Montserrat for LINE UP English Wordmark -->
+  <!-- Google Fonts: Cairo for Arabic & Plus Jakarta Sans for English / Numbers -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- QRCode.js CDN for Printable Reception Standee -->
+  <!-- QRCode.js CDN for Branded Reception QR Card & PNG Export -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <!-- Tailwind Brand Theme & Animations Configuration -->
+  <!-- Tailwind Brand Theme & Custom Animations -->
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
             navy: {
-              950: '#061538',
-              900: '#0B2259',
-              800: '#14327A',
-              700: '#1E459E',
+              950: '#061436',
+              900: '#0B2154',
+              800: '#133175',
+              700: '#1D449B',
               50: '#EEF3FC',
             },
             wood: {
-              50: '#FAF7F2',
-              100: '#F4EDE1',
-              200: '#E8DEC9',
-              300: '#D8C9AD',
-              400: '#C3AF8C',
+              50: '#FAF7F1',
+              100: '#F2ECE0',
+              200: '#E8DFCE',
+              300: '#D6C7AC',
+              400: '#C2AE8B',
             },
             gold: {
               400: '#FBBF24',
@@ -43,13 +43,13 @@
             }
           },
           fontFamily: {
-            cairo: ['Cairo', 'sans-serif'],
-            brand: ['Montserrat', 'sans-serif'],
+            cairo: ['Cairo', 'Plus Jakarta Sans', 'sans-serif'],
+            latin: ['Plus Jakarta Sans', 'Cairo', 'sans-serif'],
           },
           boxShadow: {
-            'clinic': '0 22px 50px -14px rgba(11, 34, 89, 0.14)',
-            'clinic-sm': '0 8px 24px -8px rgba(11, 34, 89, 0.10)',
-            'gold-glow': '0 10px 26px -4px rgba(245, 158, 11, 0.38)',
+            'clinic': '0 24px 55px -16px rgba(11, 33, 84, 0.16)',
+            'clinic-sm': '0 10px 28px -10px rgba(11, 33, 84, 0.12)',
+            'gold-glow': '0 12px 28px -6px rgba(245, 158, 11, 0.42)',
           },
           keyframes: {
             fadeUp: {
@@ -57,212 +57,238 @@
               '100%': { opacity: '1', transform: 'translateY(0)' },
             },
             popIn: {
-              '0%': { opacity: '0', transform: 'scale(0.84)' },
-              '70%': { transform: 'scale(1.05)' },
+              '0%': { opacity: '0', transform: 'scale(0.82)' },
+              '70%': { transform: 'scale(1.06)' },
               '100%': { opacity: '1', transform: 'scale(1)' },
             },
-            pulseSoft: {
+            pulseGentle: {
               '0%, 100%': { transform: 'scale(1)' },
-              '50%': { transform: 'scale(1.025)' },
+              '50%': { transform: 'scale(1.02)' },
             }
           },
           animation: {
-            'fade-up': 'fadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            'pop-in': 'popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-            'pulse-soft': 'pulseSoft 2.5s ease-in-out infinite',
+            'fade-up': 'fadeUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'pop-in': 'popIn 0.48s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+            'pulse-gentle': 'pulseGentle 2.6s ease-in-out infinite',
           }
         }
       }
     };
   </script>
+
+  <!-- Minimal Print Directive so Reception Card Prints Centered with Full Brand Colors -->
+  <style>
+    @media print {
+      @page { margin: 10mm; }
+      body {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        background: #ffffff !important;
+      }
+    }
+  </style>
 </head>
 
 <body class="font-cairo bg-wood-50 text-navy-900 min-h-screen antialiased selection:bg-navy-900 selection:text-white overflow-x-hidden">
 
-  <!-- ========================================================= -->
-  <!-- SUBTLE VERTICAL WOOD-SLAT PANELING BACKGROUND             -->
-  <!-- ========================================================= -->
-  <div class="print:hidden fixed inset-0 pointer-events-none z-0 bg-wood-100">
-    <!-- Refined vertical fluted wood-slat texture inspired by the physical clinic sign -->
-    <div class="absolute inset-0 opacity-65 bg-[repeating-linear-gradient(90deg,#F5EFE4_0px,#F5EFE4_8px,#E6DAC4_8px,#E6DAC4_11px,#FBF8F1_11px,#FBF8F1_15px)]"></div>
-    <!-- Soft vertical vignette so the elevated white cards pop cleanly -->
-    <div class="absolute inset-0 bg-gradient-to-b from-wood-100/20 via-wood-50/65 to-wood-50/95"></div>
+  <!-- ===================================================================== -->
+  <!-- SUBTLE FLUTED WOOD-SLAT WALL BACKGROUND (MATCHING CLINIC SIGNAGE)     -->
+  <!-- ===================================================================== -->
+  <div class="print:hidden fixed inset-0 pointer-events-none z-0 bg-wood-200">
+    <!-- Vertical fluted wood-slat texture inspired by the real LINE UP clinic wall -->
+    <div class="absolute inset-0 opacity-70 bg-[repeating-linear-gradient(90deg,#EFE7D8_0px,#EFE7D8_8px,#DFD1B8_8px,#DFD1B8_11px,#F7F2E8_11px,#F7F2E8_15px)]"></div>
+    <!-- Soft radial & vertical lighting overlay for elevated card contrast -->
+    <div class="absolute inset-0 bg-gradient-to-b from-wood-100/25 via-wood-50/60 to-wood-50/95"></div>
   </div>
 
-  <!-- ========================================================= -->
-  <!-- VIEW A: MAIN PATIENT EXPERIENCE (ULTRA-CLEAN & MINIMAL)   -->
-  <!-- ========================================================= -->
-  <main id="patientAppView" class="print:hidden relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-8 sm:py-12">
-    <div class="w-full max-w-md space-y-5">
+  <!-- ===================================================================== -->
+  <!-- VIEW 1: PATIENT-FACING MINIMALIST EXPERIENCE (NO ADMIN BUTTONS)       -->
+  <!-- ===================================================================== -->
+  <main id="patientView" class="print:hidden relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-7 sm:py-11">
+    <div class="w-full max-w-md space-y-4">
 
-      <!-- ELEVATED BRANDING & WELCOME CARD -->
-      <section class="rounded-3xl overflow-hidden bg-white/95 backdrop-blur-xl shadow-clinic border border-wood-300/70 animate-fade-up">
-        <!-- Fluted Wood-Slat Sign Header -->
-        <div class="relative px-6 pt-7 pb-6 text-center bg-[repeating-linear-gradient(90deg,#EFE6D6_0px,#EFE6D6_6px,#E2D4BB_6px,#E2D4BB_9px,#F7F1E5_9px,#F7F1E5_13px)] border-b border-wood-200/90">
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.45)_0%,rgba(232,222,201,0.18)_72%)] pointer-events-none"></div>
+      <!-- MAIN FLOATING CLINIC CARD -->
+      <section class="relative rounded-3xl overflow-hidden bg-white/95 backdrop-blur-xl shadow-clinic border border-wood-300/75 animate-fade-up">
 
-          <!-- LINE UP Custom Inline SVG Logo (Secret 5-tap trigger for Clinic Owner) -->
+        <!-- FLUTED WOOD SIGN HEADER + AR/EN LANGUAGE TOGGLE -->
+        <div class="relative px-6 pt-7 pb-6 text-center bg-[repeating-linear-gradient(90deg,#ECE2D0_0px,#ECE2D0_6px,#DCCBAE_6px,#DCCBAE_9px,#F5EFE4_9px,#F5EFE4_13px)] border-b border-wood-300/70">
+          <!-- Soft warm glow behind logo -->
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.48)_0%,rgba(232,223,206,0.16)_72%)] pointer-events-none"></div>
+
+          <!-- Compact Language Toggle Pill (Top Corner) -->
+          <button
+            id="langToggleBtn"
+            type="button"
+            class="absolute top-3.5 end-3.5 z-20 px-3 py-1.5 rounded-full bg-white/85 hover:bg-white text-navy-900 border border-wood-300/80 text-xs font-latin font-bold shadow-sm transition-all active:scale-95 cursor-pointer"
+            aria-label="Switch Language"
+          >
+            EN
+          </button>
+
+          <!-- LINE UP Custom Inline SVG Logo (Hidden 5-tap trigger within 2.5s for Clinic Owner) -->
           <div id="secretLogoTrigger" class="relative z-10 inline-flex flex-col items-center justify-center select-none cursor-default">
-            <svg class="w-48 sm:w-52 h-auto drop-shadow-[0_3px_7px_rgba(11,34,89,0.2)]" viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LINE UP Physiotherapy Clinic Logo">
+            <svg class="w-48 sm:w-52 h-auto drop-shadow-[0_3px_8px_rgba(11,33,84,0.22)]" viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LINE UP Physiotherapy & Rehabilitation Clinic Logo">
               <defs>
                 <linearGradient id="lineupNavyGrad" x1="65" y1="10" x2="215" y2="115" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stop-color="#0B2259" />
-                  <stop offset="100%" stop-color="#173B8F" />
+                  <stop offset="0%" stop-color="#0B2154" />
+                  <stop offset="100%" stop-color="#193E91" />
                 </linearGradient>
-                <filter id="logoShadow" x="-10%" y="-10%" width="125%" height="130%">
-                  <feDropShadow dx="0" dy="2.5" stdDeviation="2" flood-color="#0B2259" flood-opacity="0.22" />
+                <filter id="lineupSoftShadow" x="-10%" y="-10%" width="125%" height="130%">
+                  <feDropShadow dx="0" dy="2.5" stdDeviation="2" flood-color="#0B2154" flood-opacity="0.22" />
                 </filter>
               </defs>
 
-              <!-- Stylized Human / Spine Interlocking Emblem -->
-              <g filter="url(#logoShadow)">
+              <!-- Stylized Human / Spine Interlocking Curved Emblem -->
+              <g filter="url(#lineupSoftShadow)">
                 <!-- Head Circle (Deep Navy) -->
                 <circle cx="163" cy="21" r="10.5" fill="url(#lineupNavyGrad)" />
 
-                <!-- Upper Curved Navy Stroke with Interlocking Vertical Rib/Spine Bars -->
+                <!-- Upper Navy Curve with Interlocking Spine / Rib Strokes -->
                 <path
                   d="M192 31C183 45 167 51 146 50C138 49.5 130 50.5 124 53L138 71.5C139.2 73 137.4 74.6 135.8 73.2L118.5 57.5C116.8 59.2 115.4 61 114.2 63L126.5 79.5C127.6 81 125.6 82.6 124 81.2L110.2 67.2C105.5 73.5 103 80.5 101.5 87C97.8 76.5 98.5 62.5 106.5 52.5C116.5 40 132 39 149 41C166 43 181 41.5 192 31Z"
                   fill="url(#lineupNavyGrad)"
                 />
 
-                <!-- Lower Curved White Stroke with Counter-Interlocking Rib/Spine Bars -->
+                <!-- Lower White Curve with Counter-Interlocking Strokes -->
                 <path
                   d="M78 107C84.5 94.5 96.5 86.5 113.5 85.5C116.5 85.3 119.5 85.2 122.5 85L114.5 68.5C113.7 67 115.6 65.7 116.9 67L129.8 83.2C132 82.8 134.2 82.2 136.3 81.4L126.5 61C125.7 59.3 127.8 58 129.2 59.5L143.2 77.6C149.8 73.2 155 66 158 56.5C161.2 68.5 157.8 82.5 147.8 90.8C136.5 100.2 121 97.5 106.5 98.5C94.5 99.3 85 101.8 78 107Z"
                   fill="#FFFFFF"
-                  stroke="#0B2259"
+                  stroke="#0B2154"
                   stroke-opacity="0.16"
                   stroke-width="1"
                 />
               </g>
 
-              <!-- Bold Dark Navy LINE UP Wordmark -->
+              <!-- Bold Deep Navy LINE UP Wordmark -->
               <text
                 x="140"
                 y="139"
                 text-anchor="middle"
-                fill="#0B2259"
-                font-family="Montserrat, sans-serif"
+                fill="#0B2154"
+                font-family="Plus Jakarta Sans, sans-serif"
                 font-weight="800"
-                font-size="33"
-                letter-spacing="5.5"
+                font-size="34"
+                letter-spacing="5"
               >LINE UP</text>
             </svg>
 
-            <span class="mt-1 inline-block text-xs font-bold text-navy-800 bg-white/80 backdrop-blur-sm px-4 py-1 rounded-full border border-wood-300/70">
-              عيادة العلاج الطبيعي والتأهيل
+            <span id="txtSubtitle" class="mt-1 inline-block text-xs font-bold text-navy-900 bg-white/85 backdrop-blur-sm px-4 py-1 rounded-full border border-wood-300/75 shadow-sm">
+              للعلاج الطبيعي والتأهيل
             </span>
           </div>
         </div>
 
-        <!-- Brief Welcoming Header -->
-        <div class="px-6 pt-5 pb-6 text-center bg-white">
-          <h1 class="text-xl sm:text-2xl font-extrabold text-navy-900">
-            كيف كانت جلستك اليوم؟
-          </h1>
-          <p class="mt-1.5 text-sm text-slate-500 leading-relaxed">
-            رأيك يهمنا لتحسين تجربتك دائماً
-          </p>
-        </div>
+        <!-- =============================================================== -->
+        <!-- STEP 1: MINIMALIST RATING & FEEDBACK FORM                       -->
+        <!-- =============================================================== -->
+        <div id="stepFormContainer" class="px-6 pt-5 pb-7 bg-white">
+          <!-- Warm Welcome Title -->
+          <div class="text-center mb-5">
+            <h1 id="txtWelcomeTitle" class="text-lg sm:text-xl font-extrabold text-navy-900 leading-snug">
+              نتمنى لك تمام الشفاء! شاركنا تقييمك للجلسة
+            </h1>
+            <p id="txtWelcomeSub" class="mt-1 text-xs sm:text-sm text-slate-500">
+              رأيك وملاحظاتك يساعدوننا دائماً على تقديم أفضل رعاية لك
+            </p>
+          </div>
 
-        <!-- ===================================================== -->
-        <!-- SUB-VIEW 1: MINIMAL FEEDBACK FORM                     -->
-        <!-- ===================================================== -->
-        <div id="patientFormCard" class="px-6 pb-7 pt-1 bg-white">
-          <form id="feedbackForm" novalidate class="space-y-6">
+          <form id="feedbackForm" novalidate class="space-y-5">
 
             <!-- 1. INTERACTIVE 5-STAR RATING SELECTOR -->
-            <div class="rounded-2xl bg-wood-50/70 border border-wood-200/80 p-4 text-center">
-              <label class="block text-sm font-bold text-navy-900 mb-3">
-                تقييم الجلسة بالنجوم
-              </label>
-
+            <div class="rounded-2xl bg-wood-50/80 border border-wood-200 p-4 text-center">
               <div id="starGroup" class="flex items-center justify-center gap-1.5 sm:gap-2.5" dir="ltr" role="radiogroup" aria-label="تقييم الجلسة بالنجوم">
-                <button type="button" data-star="1" class="star-btn p-2 rounded-2xl transition-all duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="نجمة واحدة">
+                <button type="button" data-star="1" class="star-btn p-2 rounded-2xl transition-transform duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="1 Star">
                   <svg class="w-10 h-10 sm:w-11 sm:h-11 text-slate-200 transition-all duration-200" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                   </svg>
                 </button>
-                <button type="button" data-star="2" class="star-btn p-2 rounded-2xl transition-all duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="نجمتان">
+                <button type="button" data-star="2" class="star-btn p-2 rounded-2xl transition-transform duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="2 Stars">
                   <svg class="w-10 h-10 sm:w-11 sm:h-11 text-slate-200 transition-all duration-200" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                   </svg>
                 </button>
-                <button type="button" data-star="3" class="star-btn p-2 rounded-2xl transition-all duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="3 نجوم">
+                <button type="button" data-star="3" class="star-btn p-2 rounded-2xl transition-transform duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="3 Stars">
                   <svg class="w-10 h-10 sm:w-11 sm:h-11 text-slate-200 transition-all duration-200" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                   </svg>
                 </button>
-                <button type="button" data-star="4" class="star-btn p-2 rounded-2xl transition-all duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="4 نجوم">
+                <button type="button" data-star="4" class="star-btn p-2 rounded-2xl transition-transform duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="4 Stars">
                   <svg class="w-10 h-10 sm:w-11 sm:h-11 text-slate-200 transition-all duration-200" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                   </svg>
                 </button>
-                <button type="button" data-star="5" class="star-btn p-2 rounded-2xl transition-all duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="5 نجوم">
+                <button type="button" data-star="5" class="star-btn p-2 rounded-2xl transition-transform duration-200 hover:scale-115 active:scale-95 focus:outline-none focus:ring-2 focus:ring-gold-400/60 cursor-pointer" aria-label="5 Stars">
                   <svg class="w-10 h-10 sm:w-11 sm:h-11 text-slate-200 transition-all duration-200" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
                   </svg>
                 </button>
               </div>
 
-              <!-- Dynamic Arabic Rating Status Pill -->
-              <div class="min-h-[32px] mt-2.5 flex items-center justify-center">
+              <!-- Dynamic Rating Label Pill -->
+              <div class="min-h-[30px] mt-2.5 flex items-center justify-center">
                 <span id="ratingStatusPill" class="inline-flex items-center px-4 py-1 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-400 border border-wood-200 transition-all duration-300">
-                  اختر عدد النجوم للتقييم
+                  اضغط على النجوم للتقييم
                 </span>
               </div>
             </div>
 
-            <!-- 2. NOTES / ISSUE TEXTAREA -->
+            <!-- 2. NOTES / ISSUES TEXTAREA -->
             <div>
-              <label for="feedbackMessage" class="block text-sm font-bold text-navy-900 mb-2">
+              <label id="txtNotesLabel" for="feedbackComment" class="block text-sm font-bold text-navy-900 mb-2">
                 ملاحظاتك أو أي مشكلة واجهتك
               </label>
               <textarea
-                id="feedbackMessage"
+                id="feedbackComment"
                 rows="4"
-                class="w-full rounded-2xl border border-wood-300/90 bg-wood-50/45 px-4 py-3.5 text-sm text-navy-900 placeholder:text-slate-400 focus:bg-white focus:border-navy-800 focus:ring-4 focus:ring-navy-900/10 focus:outline-none transition-all duration-200 resize-none leading-relaxed"
-                placeholder="اكتب رأيك في الجلسة، أو لو واجهتك أي مشكلة نحب نعرفها ونحلها فوراً..."
+                class="w-full rounded-2xl border border-wood-300 bg-wood-50/45 px-4 py-3.5 text-sm text-navy-900 placeholder:text-slate-400 focus:bg-white focus:border-navy-800 focus:ring-4 focus:ring-navy-900/10 focus:outline-none transition-all duration-200 resize-none leading-relaxed"
+                placeholder="ملاحظاتك أو أي مشكلة واجهتك أثناء الجلسة..."
               ></textarea>
             </div>
 
-            <!-- 3. OPTIONAL COMPACT CONTACT TOGGLE & FIELDS -->
-            <div class="rounded-2xl border border-wood-200/90 bg-wood-50/55 overflow-hidden transition-all">
+            <!-- 3. COLLAPSIBLE OPTIONAL CONTACT INFO SECTION -->
+            <div class="rounded-2xl border border-wood-200 bg-wood-50/60 overflow-hidden transition-all duration-300">
               <button
                 type="button"
                 id="contactToggleBtn"
-                class="w-full px-4 py-3 flex items-center justify-between text-xs sm:text-sm font-semibold text-navy-800 hover:bg-wood-100/60 transition-colors cursor-pointer"
+                class="w-full px-4 py-3 flex items-center justify-between text-xs sm:text-sm font-bold text-navy-900 hover:bg-wood-100/70 transition-colors cursor-pointer"
               >
-                <span class="flex items-center gap-2">
-                  <span id="contactToggleDot" class="w-4 h-4 rounded-md border border-navy-700/40 bg-white flex items-center justify-center transition-colors">
-                    <svg id="contactCheckIcon" class="hidden w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
+                <span class="flex items-center gap-2.5">
+                  <span id="contactToggleBox" class="w-4 h-4 rounded-md border border-navy-800/40 bg-white flex items-center justify-center transition-colors shrink-0">
+                    <svg id="contactToggleCheck" class="hidden w-3 h-3 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
                     </svg>
                   </span>
-                  <span>أحب الإدارة تتواصل معايا (اختياري)</span>
+                  <span id="txtContactToggle">هل تود أن نتواصل معك؟ (اختياري)</span>
                 </span>
-                <svg id="contactChevron" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                <svg id="contactChevron" class="w-4 h-4 text-slate-400 transition-transform duration-200 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
                 </svg>
               </button>
 
-              <div id="contactFieldsBox" class="hidden px-4 pb-4 pt-2 space-y-3 border-t border-wood-200/70 bg-white/70">
+              <div id="contactFieldsWrap" class="hidden px-4 pb-4 pt-2.5 space-y-3 border-t border-wood-200/80 bg-white/80">
+                <!-- Reassurance Note (Auto-shown for 1–3 stars) -->
+                <div id="lowRatingReassurance" class="hidden rounded-xl bg-amber-50 border border-amber-200/90 px-3.5 py-2.5 text-xs font-semibold text-amber-900 leading-relaxed flex items-start gap-2">
+                  <span class="text-base leading-none mt-0.5">💛</span>
+                  <span id="txtReassuranceNote">يهمنا حل أي مشكلة فوراً — سيب رقمك لو حابب نتواصل معك</span>
+                </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label for="patientName" class="block text-xs font-semibold text-slate-600 mb-1">الاسم (اختياري)</label>
+                    <label id="txtNameLabel" for="patientName" class="block text-xs font-semibold text-slate-600 mb-1">الاسم (اختياري)</label>
                     <input
                       id="patientName"
                       type="text"
-                      class="w-full rounded-xl border border-wood-300/90 bg-white px-3.5 py-2.5 text-sm text-navy-900 placeholder:text-slate-400 focus:border-navy-800 focus:ring-2 focus:ring-navy-900/10 focus:outline-none transition-all"
+                      class="w-full rounded-xl border border-wood-300 bg-white px-3.5 py-2.5 text-sm text-navy-900 placeholder:text-slate-400 focus:border-navy-800 focus:ring-2 focus:ring-navy-900/10 focus:outline-none transition-all"
                       placeholder="الاسم"
                     />
                   </div>
                   <div>
-                    <label for="patientPhone" class="block text-xs font-semibold text-slate-600 mb-1">رقم الموبايل (اختياري)</label>
+                    <label id="txtPhoneLabel" for="patientPhone" class="block text-xs font-semibold text-slate-600 mb-1">رقم الموبايل (اختياري)</label>
                     <input
                       id="patientPhone"
                       type="tel"
                       dir="ltr"
-                      class="w-full rounded-xl border border-wood-300/90 bg-white px-3.5 py-2.5 text-sm text-navy-900 placeholder:text-slate-400 text-right focus:border-navy-800 focus:ring-2 focus:ring-navy-900/10 focus:outline-none transition-all"
+                      class="w-full rounded-xl border border-wood-300 bg-white px-3.5 py-2.5 text-sm font-latin text-navy-900 placeholder:text-slate-400 text-start focus:border-navy-800 focus:ring-2 focus:ring-navy-900/10 focus:outline-none transition-all"
                       placeholder="01X XXXX XXXX"
                     />
                   </div>
@@ -270,14 +296,14 @@
               </div>
             </div>
 
-            <!-- 4. CLEAN SUBMIT CTA BUTTON -->
+            <!-- 4. PRIMARY NAVY SUBMIT BUTTON WITH SPINNER -->
             <button
               id="submitFeedbackBtn"
               type="submit"
-              class="w-full py-4 px-6 rounded-2xl bg-gradient-to-l from-navy-900 to-navy-800 hover:from-navy-950 hover:to-navy-900 text-white font-bold text-base shadow-lg shadow-navy-900/20 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-[0.98] disabled:opacity-70 cursor-pointer"
+              class="w-full py-4 px-6 rounded-2xl bg-gradient-to-l from-navy-900 to-navy-800 hover:from-navy-950 hover:to-navy-900 text-white font-bold text-base shadow-lg shadow-navy-900/25 flex items-center justify-center gap-2.5 transition-all duration-200 active:scale-[0.98] disabled:opacity-70 cursor-pointer"
             >
-              <span id="submitBtnLabel">إرسال التقييم</span>
-              <svg id="submitBtnArrow" class="w-5 h-5 rotate-180" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <span id="submitBtnText">إرسال التقييم</span>
+              <svg id="submitBtnArrow" class="w-5 h-5 rtl:rotate-180 transition-transform" fill="none" stroke="currentColor" stroke-width="2.3" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
               </svg>
               <svg id="submitBtnSpinner" class="hidden w-5 h-5 animate-spin text-white" fill="none" viewBox="0 0 24 24">
@@ -288,49 +314,50 @@
           </form>
         </div>
 
-        <!-- ===================================================== -->
-        <!-- SUB-VIEW 2: POST-SUBMISSION THANK YOU & GOOGLE MAPS   -->
-        <!-- ===================================================== -->
-        <div id="thankYouCard" class="hidden px-6 pb-7 pt-2 bg-white space-y-5 animate-fade-up">
+        <!-- =============================================================== -->
+        <!-- STEP 2: POST-SUBMISSION THANK YOU & GOOGLE MAPS REVIEW CARD     -->
+        <!-- =============================================================== -->
+        <div id="stepSuccessContainer" class="hidden px-6 pt-6 pb-7 bg-white space-y-5 animate-fade-up">
 
-          <!-- Thank You Status Block -->
+          <!-- Animated Success Checkmark + Tailored Thank You -->
           <div class="text-center">
             <div class="w-16 h-16 mx-auto mb-3.5 rounded-full bg-emerald-50 border-4 border-emerald-100 flex items-center justify-center animate-pop-in">
               <svg class="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2.8" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
             </div>
-            <h2 id="thankYouHeading" class="text-xl font-extrabold text-navy-900">
-              شكراً لك على وقتك ورأيك! 💙
+            <h2 id="successTitle" class="text-xl font-extrabold text-navy-900">
+              شكراً لك على تقييمك الرائع! 💙
             </h2>
-            <p id="thankYouBody" class="mt-1.5 text-sm text-slate-600 leading-relaxed">
-              تم استلام تقييمك بنجاح، ونتمنى لك دوام الصحة والعافية مع فريق LINE UP.
+            <p id="successMessage" class="mt-1.5 text-sm text-slate-600 leading-relaxed">
+              سعداء جداً بتجربتك معنا ونتمنى لك دوام الصحة والعافية.
             </p>
           </div>
 
-          <!-- Caring Follow-Up Reassurance Box (Shown when rating is 1-3 stars) -->
-          <div id="lowRatingBanner" class="hidden rounded-2xl bg-amber-50 border border-amber-200 p-4">
+          <!-- Extra Caring Note for Low Ratings (1-3 Stars) -->
+          <div id="successFollowupNote" class="hidden rounded-2xl bg-amber-50 border border-amber-200 p-4">
             <div class="flex items-start gap-3">
               <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
                 </svg>
               </div>
-              <p class="text-xs sm:text-sm text-amber-900 font-medium leading-relaxed">
-                نعتذر بشدة عن أي تقصير واجهته اليوم. ملاحظتك وصلت فوراً لإدارة عيادة <span class="font-brand font-bold">LINE UP</span> وسنتابع الأمر حالاً لضمان تقديم أفضل رعاية لك.
+              <p id="txtSuccessApology" class="text-xs sm:text-sm text-amber-900 font-medium leading-relaxed">
+                وصلت ملاحظتك فوراً لإدارة عيادة LINE UP وسنتابعها بكل اهتمام لضمان راحتك التامة في زياراتك القادمة.
               </p>
             </div>
           </div>
 
-          <!-- Polished Google Maps Review Card -->
+          <!-- PROMINENT GOOGLE MAPS REVIEW CARD -->
           <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy-900 via-navy-800 to-navy-950 p-5 sm:p-6 text-white shadow-clinic-sm">
-            <div class="absolute -top-10 -left-10 w-32 h-32 rounded-full bg-gold-400/15 blur-2xl pointer-events-none"></div>
-            <div class="absolute -bottom-12 -right-12 w-36 h-36 rounded-full bg-blue-400/15 blur-2xl pointer-events-none"></div>
+            <!-- Soft ambient lights -->
+            <div class="absolute -top-10 -start-10 w-32 h-32 rounded-full bg-gold-400/15 blur-2xl pointer-events-none"></div>
+            <div class="absolute -bottom-12 -end-12 w-36 h-36 rounded-full bg-blue-400/15 blur-2xl pointer-events-none"></div>
 
             <div class="relative z-10 text-center space-y-3.5">
-              <!-- Google Maps Pin + 5 Stars -->
+              <!-- Google Maps Pin + 5 Stars Pill -->
               <div class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-2xl bg-white/10 backdrop-blur-md border border-white/15">
-                <svg class="w-6 h-6 shrink-0" viewBox="0 0 48 48" fill="none">
+                <svg class="w-6 h-6 shrink-0" viewBox="0 0 48 48" fill="none" aria-hidden="true">
                   <path d="M24 4C15.72 4 9 10.72 9 19C9 29.5 24 44 24 44C24 44 39 29.5 39 19C39 10.72 32.28 4 24 4Z" fill="#EA4335"/>
                   <path d="M24 4C19.6 4 15.65 5.9 12.92 8.92L24 19V4Z" fill="#1A73E8"/>
                   <path d="M12.92 8.92C10.48 11.62 9 15.14 9 19C9 22.86 10.7 27.14 13.45 31.15L24 19L12.92 8.92Z" fill="#FBBC04"/>
@@ -343,41 +370,41 @@
               </div>
 
               <div>
-                <h3 class="text-base sm:text-lg font-extrabold text-white">
+                <h3 id="txtGmapsTitle" class="text-base sm:text-lg font-extrabold text-white">
                   شاركنا رأيك على Google Maps
                 </h3>
-                <p class="mt-1 text-xs text-blue-100/85 leading-relaxed">
+                <p id="txtGmapsSub" class="mt-1 text-xs text-blue-100/85 leading-relaxed">
                   تقييمك يساعد الآخرين في اختيار الرعاية المناسبة ويشجع فريقنا دائماً.
                 </p>
               </div>
 
-              <!-- One-Click Copy Note Preview (Shown if patient wrote a note) -->
-              <div id="copyNoteWrap" class="hidden rounded-xl bg-white/10 border border-white/15 p-3 text-right">
-                <p id="copyNotePreview" class="text-xs text-white/95 line-clamp-3 leading-relaxed"></p>
+              <!-- Optional One-Click Copy Comment Box (Visible when patient entered a comment) -->
+              <div id="copyCommentWrap" class="hidden rounded-xl bg-white/10 border border-white/15 p-3 text-start">
+                <p id="copyCommentPreview" class="text-xs text-white/95 line-clamp-3 leading-relaxed"></p>
                 <button
-                  id="copyNoteBtn"
+                  id="copyCommentBtn"
                   type="button"
-                  class="mt-2.5 w-full py-2 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] cursor-pointer"
+                  class="mt-2.5 w-full py-2.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] cursor-pointer"
                 >
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <svg id="copyIconDefault" class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
                   </svg>
-                  <span>نسخ ملاحظتك</span>
+                  <span id="copyCommentBtnText">نسخ ملاحظتي للصقها على جوجل</span>
                 </button>
               </div>
 
-              <!-- Open Google Maps Review Button -->
+              <!-- Primary Google Maps Review Button -->
               <a
                 id="googleMapsReviewLink"
                 href="https://www.google.com/maps/search/?api=1&query=LINE+UP+Physiotherapy+Clinic"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-navy-950 font-extrabold text-sm shadow-gold-glow flex items-center justify-center gap-2 transition-all active:scale-[0.98] animate-pulse-soft"
+                class="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-gold-400 to-gold-500 hover:from-gold-500 hover:to-gold-600 text-navy-950 font-extrabold text-sm shadow-gold-glow flex items-center justify-center gap-2 transition-all active:scale-[0.98] animate-pulse-gentle"
               >
                 <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/>
                 </svg>
-                <span>التقييم على Google Maps</span>
+                <span id="txtGmapsBtn">قيّم العيادة على Google Maps</span>
                 <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
                 </svg>
@@ -385,29 +412,32 @@
             </div>
           </div>
 
-          <!-- Return / Submit Another -->
-          <button
-            id="returnHomeBtn"
-            type="button"
-            class="w-full py-3 px-4 rounded-xl bg-wood-50 hover:bg-wood-100 text-navy-900 font-bold text-xs sm:text-sm border border-wood-200 transition-all active:scale-[0.98] cursor-pointer"
-          >
-            إرسال تقييم جديد
-          </button>
+          <!-- Subtle Reset Link -->
+          <div class="text-center pt-1">
+            <button
+              id="resetFormBtn"
+              type="button"
+              class="text-xs font-bold text-slate-400 hover:text-navy-900 underline underline-offset-4 transition-colors cursor-pointer py-1 px-3"
+            >
+              إرسال تقييم جديد
+            </button>
+          </div>
         </div>
       </section>
 
-      <!-- Minimal Brand Copyright (No admin buttons or links anywhere!) -->
+      <!-- Clean Footer Brand Mark (Zero admin links or buttons) -->
       <p class="text-center text-[11px] text-slate-400">
-        &copy; <span id="footerYear">2026</span> <span class="font-brand font-bold text-navy-900/75">LINE UP</span> — عيادة العلاج الطبيعي والتأهيل
+        &copy; <span id="footerYear" class="font-latin">2026</span> <span class="font-latin font-bold text-navy-900/75">LINE UP</span> — <span id="txtFooterSub">عيادة العلاج الطبيعي والتأهيل</span>
       </p>
     </div>
   </main>
 
-  <!-- ========================================================= -->
-  <!-- VIEW B: HIDDEN ADMIN PIN LOCK SCREEN (#admin or 5 taps)   -->
-  <!-- ========================================================= -->
-  <section id="adminPinView" class="print:hidden hidden relative z-20 min-h-screen flex items-center justify-center px-4 py-8">
-    <div class="w-full max-w-sm rounded-3xl bg-white/95 backdrop-blur-xl shadow-clinic border border-wood-300/80 p-6 sm:p-7 text-center animate-fade-up">
+  <!-- ===================================================================== -->
+  <!-- VIEW 2: HIDDEN ADMIN PIN ENTRY MODAL (5-TAPS ON LOGO / #admin / ?admin=1) -->
+  <!-- ===================================================================== -->
+  <div id="adminPinModal" dir="rtl" class="print:hidden hidden fixed inset-0 z-40 flex items-center justify-center p-4">
+    <div id="pinModalBackdrop" class="absolute inset-0 bg-navy-950/60 backdrop-blur-sm"></div>
+    <div class="relative z-10 w-full max-w-sm rounded-3xl bg-white shadow-2xl border border-wood-300 p-6 sm:p-7 text-center animate-pop-in">
       <div class="w-14 h-14 mx-auto mb-4 rounded-2xl bg-navy-900 text-gold-400 flex items-center justify-center shadow-md">
         <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" />
@@ -415,7 +445,7 @@
       </div>
 
       <h2 class="text-lg font-extrabold text-navy-900">دخول إدارة عيادة LINE UP</h2>
-      <p class="mt-1 text-xs text-slate-500">أدخل الرقم السري للوصول إلى لوحة التحكم</p>
+      <p class="mt-1 text-xs text-slate-500">أدخل الرقم السري لفتح لوحة التحكم ومتابعة التقييمات</p>
 
       <form id="pinLoginForm" class="mt-5 space-y-4">
         <div>
@@ -424,11 +454,13 @@
             type="password"
             inputmode="numeric"
             autocomplete="off"
-            maxlength="8"
-            class="w-full rounded-2xl border border-wood-300 bg-wood-50/70 px-4 py-3.5 text-center text-lg font-bold tracking-[0.4em] text-navy-900 placeholder:tracking-normal placeholder:text-xs placeholder:font-normal placeholder:text-slate-400 focus:bg-white focus:border-navy-800 focus:ring-4 focus:ring-navy-900/10 focus:outline-none"
+            maxlength="10"
+            class="w-full rounded-2xl border border-wood-300 bg-wood-50 px-4 py-3.5 text-center font-latin text-lg font-bold tracking-[0.4em] text-navy-900 placeholder:font-cairo placeholder:tracking-normal placeholder:text-xs placeholder:font-normal placeholder:text-slate-400 focus:bg-white focus:border-navy-800 focus:ring-4 focus:ring-navy-900/10 focus:outline-none"
             placeholder="الرقم السري (الافتراضي: 1234)"
           />
-          <p id="pinErrorMsg" class="hidden mt-2 text-xs font-bold text-rose-600">الرقم السري غير صحيح، حاول مرة أخرى</p>
+          <p id="pinErrorMsg" class="hidden mt-2 text-xs font-bold text-rose-600">
+            الرقم السري غير صحيح، حاول مرة أخرى
+          </p>
         </div>
 
         <button
@@ -439,104 +471,133 @@
         </button>
 
         <button
-          id="cancelPinBtn"
+          id="closePinModalBtn"
           type="button"
           class="w-full py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:text-navy-900 hover:bg-wood-100 transition-colors cursor-pointer"
         >
-          العودة لصفحة المريض
+          إلغاء والعودة
         </button>
       </form>
     </div>
-  </section>
+  </div>
 
-  <!-- ========================================================= -->
-  <!-- VIEW C: HIDDEN ADMIN DASHBOARD (REAL-TIME FIRESTORE)      -->
-  <!-- ========================================================= -->
-  <section id="adminDashboardView" class="print:hidden hidden relative z-20 min-h-screen pb-14">
+  <!-- ===================================================================== -->
+  <!-- VIEW 3: HIDDEN FULL-SCREEN ADMIN DASHBOARD (LIVE FIRESTORE)           -->
+  <!-- ===================================================================== -->
+  <section id="adminDashboardView" dir="rtl" class="print:hidden hidden relative z-30 min-h-screen pb-14">
 
-    <!-- Sticky Navy Top Bar -->
+    <!-- Sticky Navy Header -->
     <header class="sticky top-0 z-30 bg-navy-900/95 backdrop-blur-md text-white border-b border-white/10 shadow-md">
       <div class="max-w-5xl mx-auto px-4 py-3.5 flex flex-wrap items-center justify-between gap-3">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
-            <span class="font-brand font-black text-xs text-gold-400 tracking-wider">LU</span>
+            <span class="font-latin font-extrabold text-xs text-gold-400 tracking-wider">LU</span>
           </div>
           <div>
-            <h1 class="text-sm sm:text-base font-extrabold flex items-center gap-2">
-              <span>لوحة تحكم عيادة LINE UP</span>
-              <span id="dbStatusBadge" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+            <div class="flex flex-wrap items-center gap-2">
+              <h1 class="text-sm sm:text-base font-extrabold">لوحة تحكم عيادة LINE UP</h1>
+              <span id="firebaseStatusBadge" class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>متصل لحظياً</span>
+                <span>متصل بـ <span class="font-latin">maps-9dcd4</span></span>
               </span>
-            </h1>
-            <p class="text-[11px] text-blue-200/90">متابعة تقييمات المرضى وإعدادات Google Maps وطباعة الـ QR</p>
+            </div>
+            <p class="text-[11px] text-blue-200/90">مزامنة فورية لتقييمات المرضى، كارت الـ QR، وإعدادات Google Maps</p>
           </div>
         </div>
 
         <button
-          id="backToPatientBtn"
+          id="logoutDashboardBtn"
           type="button"
           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-navy-900 hover:bg-wood-100 text-xs font-extrabold shadow-sm transition-all active:scale-95 cursor-pointer"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
           </svg>
-          <span>العودة لصفحة المريض</span>
+          <span>خروج / إغلاق</span>
         </button>
       </div>
     </header>
 
     <div class="max-w-5xl mx-auto px-4 pt-6 space-y-6">
 
-      <!-- REAL-TIME KPI SUMMARY CARDS -->
+      <!-- FIRESTORE PERMISSION ERROR HELPER ALERT (Shown only if Firestore Rules reject access) -->
+      <div id="firestoreErrorAlert" class="hidden rounded-2xl bg-rose-50 border border-rose-200 p-4 sm:p-5 text-rose-900 space-y-2.5 shadow-sm">
+        <div class="flex items-start gap-3">
+          <div class="w-9 h-9 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+            </svg>
+          </div>
+          <div class="space-y-1.5 flex-1">
+            <h3 id="firestoreErrorTitle" class="text-sm font-extrabold">تنبيه اتصال قاعدة بيانات Firebase (Firestore)</h3>
+            <p id="firestoreErrorText" class="text-xs leading-relaxed text-rose-800">
+              تم رفض الوصول إلى Firestore. تأكد من تفعيل <strong>Firestore Database</strong> في مشروعك <code class="font-latin font-bold">maps-9dcd4</code> وتحديث قواعد الأمان (Rules) لتسمح بالقراءة والكتابة على <code class="font-latin">feedbacks</code> و <code class="font-latin">settings</code>:
+            </p>
+            <pre dir="ltr" class="mt-2 p-3 rounded-xl bg-navy-950 text-emerald-300 text-[11px] font-mono overflow-x-auto leading-relaxed">rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /feedbacks/{docId} { allow read, write: if true; }
+    match /settings/{docId} { allow read, write: if true; }
+  }
+}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 REAL-TIME KPI STAT CARDS -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <div class="bg-white/95 rounded-2xl p-4 sm:p-5 border border-wood-200 shadow-clinic-sm">
           <p class="text-xs font-bold text-slate-500">إجمالي التقييمات</p>
-          <p id="kpiTotal" class="mt-2 text-2xl sm:text-3xl font-extrabold text-navy-900">0</p>
+          <p id="kpiTotal" class="mt-2 text-2xl sm:text-3xl font-latin font-extrabold text-navy-900">0</p>
         </div>
         <div class="bg-white/95 rounded-2xl p-4 sm:p-5 border border-wood-200 shadow-clinic-sm">
           <p class="text-xs font-bold text-slate-500">متوسط التقييم</p>
-          <p class="mt-2 text-2xl sm:text-3xl font-extrabold text-gold-500 flex items-center gap-1.5">
+          <p class="mt-2 text-2xl sm:text-3xl font-latin font-extrabold text-gold-500 flex items-center gap-1.5">
             <span id="kpiAvg">0.0</span>
             <span class="text-xl">★</span>
           </p>
         </div>
-        <div class="bg-white/95 rounded-2xl p-4 sm:p-5 border border-wood-200 shadow-clinic-sm">
-          <p class="text-xs font-bold text-slate-500">تقييمات 5 نجوم</p>
-          <p id="kpiFiveStar" class="mt-2 text-2xl sm:text-3xl font-extrabold text-emerald-600">0</p>
+        <div class="bg-white/95 rounded-2xl p-4 sm:p-5 border border-amber-200 shadow-clinic-sm">
+          <p class="text-xs font-bold text-amber-800">الشكاوى والملاحظات (≤3 نجوم)</p>
+          <p id="kpiComplaints" class="mt-2 text-2xl sm:text-3xl font-latin font-extrabold text-amber-600">0</p>
         </div>
-        <div class="bg-white/95 rounded-2xl p-4 sm:p-5 border border-rose-200/80 shadow-clinic-sm">
-          <p class="text-xs font-bold text-rose-700">مشاكل تحتاج متابعة</p>
-          <p id="kpiUnresolved" class="mt-2 text-2xl sm:text-3xl font-extrabold text-rose-600">0</p>
+        <div class="bg-white/95 rounded-2xl p-4 sm:p-5 border border-rose-200 shadow-clinic-sm">
+          <p class="text-xs font-bold text-rose-700">قيد المتابعة</p>
+          <p id="kpiPending" class="mt-2 text-2xl sm:text-3xl font-latin font-extrabold text-rose-600">0</p>
         </div>
       </div>
 
-      <!-- DASHBOARD NAVIGATION TABS -->
+      <!-- 3 DASHBOARD NAVIGATION TABS -->
       <div class="bg-white/95 p-1.5 rounded-2xl border border-wood-200 shadow-sm flex flex-wrap gap-1.5">
         <button type="button" data-dash-tab="panelFeedbacks" class="dash-tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-navy-900 text-white transition-all cursor-pointer">
-          تقييمات وملاحظات المرضى
+          التقييمات والشكاوى
         </button>
         <button type="button" data-dash-tab="panelQr" class="dash-tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold text-navy-900 hover:bg-wood-100 transition-all cursor-pointer">
           كارت الـ QR للاستقبال
         </button>
         <button type="button" data-dash-tab="panelSettings" class="dash-tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold text-navy-900 hover:bg-wood-100 transition-all cursor-pointer">
-          إعدادات العيادة و Google Maps
+          الإعدادات
         </button>
       </div>
 
-      <!-- TAB 1: REAL-TIME FEEDBACKS LIST -->
+      <!-- =============================================================== -->
+      <!-- TAB 1: REAL-TIME FEEDBACKS & COMPLAINTS                         -->
+      <!-- =============================================================== -->
       <div id="panelFeedbacks" class="dash-panel space-y-4">
-        <!-- Filters & CSV Export Bar -->
+        <!-- Filter Pills + CSV Export Bar -->
         <div class="flex flex-wrap items-center justify-between gap-3 bg-white/95 p-3.5 rounded-2xl border border-wood-200 shadow-sm">
           <div class="flex flex-wrap items-center gap-1.5">
             <button type="button" data-filter="all" class="fb-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-navy-900 text-white transition-all cursor-pointer">
               الكل
             </button>
             <button type="button" data-filter="issues" class="fb-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-wood-100 text-navy-900 hover:bg-wood-200 transition-all cursor-pointer">
-              مشاكل وتقييمات منخفضة
+              شكاوى ومشاكل (1-3 نجوم)
             </button>
             <button type="button" data-filter="positive" class="fb-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-wood-100 text-navy-900 hover:bg-wood-200 transition-all cursor-pointer">
-              تقييمات إيجابية
+              إيجابي (4-5 نجوم)
+            </button>
+            <button type="button" data-filter="unresolved" class="fb-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-wood-100 text-navy-900 hover:bg-wood-200 transition-all cursor-pointer">
+              لم تتم متابعتها
             </button>
           </div>
 
@@ -548,82 +609,103 @@
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
             </svg>
-            <span>تصدير CSV (Excel)</span>
+            <span>تصدير Excel (CSV)</span>
           </button>
         </div>
 
-        <!-- Feedback Items Container -->
+        <!-- Feedback Cards List -->
         <div id="adminFeedbackList" class="space-y-3">
-          <div class="bg-white rounded-2xl p-10 border border-wood-200 text-center text-sm text-slate-400 font-semibold">
-            جاري تحميل التقييمات...
+          <div class="bg-white/95 rounded-2xl p-10 border border-wood-200 text-center text-sm text-slate-400 font-semibold">
+            جاري تحميل التقييمات من Firebase...
           </div>
         </div>
       </div>
 
-      <!-- TAB 2: PRINTABLE RECEPTION QR CODE STANDEE -->
+      <!-- =============================================================== -->
+      <!-- TAB 2: BRANDED PRINTABLE RECEPTION QR CARD + PNG DOWNLOAD       -->
+      <!-- =============================================================== -->
       <div id="panelQr" class="dash-panel hidden">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-          <!-- QR Configuration Card -->
-          <div class="bg-white/95 rounded-3xl p-6 border border-wood-200 shadow-clinic-sm space-y-4">
-            <h3 class="text-base font-extrabold text-navy-900">توليد وطباعة كارت الـ QR للاستقبال</h3>
-            <p class="text-xs text-slate-500 leading-relaxed">
-              يتم تلقائياً إزالة جزء <code class="px-1.5 py-0.5 rounded bg-wood-100 text-navy-900 font-mono">#admin</code> من الرابط حتى يفتح للمريض صفحة التقييم فقط عند المسح.
-            </p>
+
+          <!-- QR Controls Card -->
+          <div class="bg-white/95 rounded-3xl p-6 border border-wood-200 shadow-clinic-sm space-y-5">
+            <div>
+              <h3 class="text-base font-extrabold text-navy-900">تجهيز كارت الـ QR للاستقبال</h3>
+              <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                بعد رفع هذا الملف على استضافتك (مثل GitHub Pages أو Vercel)، الصق رابط الموقع هنا ليتم توليد كود QR نظيف يفتح صفحة المريض مباشرة.
+              </p>
+            </div>
 
             <div>
-              <label for="qrTargetUrlInput" class="block text-xs font-bold text-navy-900 mb-1.5">رابط صفحة المريض:</label>
+              <label for="qrTargetUrlInput" class="block text-xs font-bold text-navy-900 mb-1.5">رابط صفحة تقييم المرضى:</label>
               <input
                 id="qrTargetUrlInput"
                 type="url"
                 dir="ltr"
-                class="w-full rounded-xl border border-wood-300 bg-wood-50 px-3.5 py-2.5 text-xs text-navy-900 focus:bg-white focus:border-navy-800 focus:outline-none"
+                class="w-full rounded-xl border border-wood-300 bg-wood-50 px-3.5 py-3 text-xs font-latin text-navy-900 focus:bg-white focus:border-navy-800 focus:outline-none"
+                placeholder="https://your-clinic-site.vercel.app"
               />
             </div>
 
-            <button
-              id="printStandeeBtn"
-              type="button"
-              class="w-full py-3.5 px-5 rounded-2xl bg-navy-900 hover:bg-navy-800 text-white font-bold text-sm shadow-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
-            >
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
-              </svg>
-              <span>طباعة كارت الـ QR للاستقبال</span>
-            </button>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button
+                id="printQrCardBtn"
+                type="button"
+                class="w-full py-3.5 px-4 rounded-2xl bg-navy-900 hover:bg-navy-800 text-white font-bold text-xs sm:text-sm shadow-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z" />
+                </svg>
+                <span>طباعة الكارت</span>
+              </button>
+
+              <button
+                id="downloadQrPngBtn"
+                type="button"
+                class="w-full py-3.5 px-4 rounded-2xl bg-wood-100 hover:bg-wood-200 text-navy-900 border border-wood-300 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                <span>تحميل QR كـ PNG</span>
+              </button>
+            </div>
           </div>
 
-          <!-- Live Standee Preview -->
-          <div class="rounded-3xl overflow-hidden border-2 border-navy-900/15 bg-white shadow-clinic max-w-sm mx-auto w-full">
-            <div class="px-6 pt-6 pb-5 text-center bg-[repeating-linear-gradient(90deg,#EFE6D6_0px,#EFE6D6_6px,#E2D4BB_6px,#E2D4BB_9px,#F7F1E5_9px,#F7F1E5_13px)] border-b border-wood-200">
+          <!-- Live Branded Reception Card Preview -->
+          <div class="rounded-3xl overflow-hidden border-2 border-navy-900/20 bg-white shadow-clinic max-w-sm mx-auto w-full">
+            <div class="px-6 pt-6 pb-5 text-center bg-[repeating-linear-gradient(90deg,#ECE2D0_0px,#ECE2D0_6px,#DCCBAE_6px,#DCCBAE_9px,#F5EFE4_9px,#F5EFE4_13px)] border-b border-wood-300">
               <svg class="w-40 mx-auto h-auto" viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="163" cy="21" r="10.5" fill="#0B2259" />
-                <path d="M192 31C183 45 167 51 146 50C138 49.5 130 50.5 124 53L138 71.5C139.2 73 137.4 74.6 135.8 73.2L118.5 57.5C116.8 59.2 115.4 61 114.2 63L126.5 79.5C127.6 81 125.6 82.6 124 81.2L110.2 67.2C105.5 73.5 103 80.5 101.5 87C97.8 76.5 98.5 62.5 106.5 52.5C116.5 40 132 39 149 41C166 43 181 41.5 192 31Z" fill="#0B2259" />
-                <path d="M78 107C84.5 94.5 96.5 86.5 113.5 85.5C116.5 85.3 119.5 85.2 122.5 85L114.5 68.5C113.7 67 115.6 65.7 116.9 67L129.8 83.2C132 82.8 134.2 82.2 136.3 81.4L126.5 61C125.7 59.3 127.8 58 129.2 59.5L143.2 77.6C149.8 73.2 155 66 158 56.5C161.2 68.5 157.8 82.5 147.8 90.8C136.5 100.2 121 97.5 106.5 98.5C94.5 99.3 85 101.8 78 107Z" fill="#FFFFFF" stroke="#0B2259" stroke-opacity="0.2" stroke-width="1" />
-                <text x="140" y="139" text-anchor="middle" fill="#0B2259" font-family="Montserrat, sans-serif" font-weight="800" font-size="33" letter-spacing="5.5">LINE UP</text>
+                <circle cx="163" cy="21" r="10.5" fill="#0B2154" />
+                <path d="M192 31C183 45 167 51 146 50C138 49.5 130 50.5 124 53L138 71.5C139.2 73 137.4 74.6 135.8 73.2L118.5 57.5C116.8 59.2 115.4 61 114.2 63L126.5 79.5C127.6 81 125.6 82.6 124 81.2L110.2 67.2C105.5 73.5 103 80.5 101.5 87C97.8 76.5 98.5 62.5 106.5 52.5C116.5 40 132 39 149 41C166 43 181 41.5 192 31Z" fill="#0B2154" />
+                <path d="M78 107C84.5 94.5 96.5 86.5 113.5 85.5C116.5 85.3 119.5 85.2 122.5 85L114.5 68.5C113.7 67 115.6 65.7 116.9 67L129.8 83.2C132 82.8 134.2 82.2 136.3 81.4L126.5 61C125.7 59.3 127.8 58 129.2 59.5L143.2 77.6C149.8 73.2 155 66 158 56.5C161.2 68.5 157.8 82.5 147.8 90.8C136.5 100.2 121 97.5 106.5 98.5C94.5 99.3 85 101.8 78 107Z" fill="#FFFFFF" stroke="#0B2154" stroke-opacity="0.2" stroke-width="1" />
+                <text x="140" y="139" text-anchor="middle" fill="#0B2154" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="34" letter-spacing="5">LINE UP</text>
               </svg>
-              <p class="mt-1 text-xs font-bold text-navy-800">عيادة العلاج الطبيعي والتأهيل</p>
+              <p class="mt-1 text-xs font-bold text-navy-900">للعلاج الطبيعي والتأهيل</p>
             </div>
             <div class="p-6 text-center space-y-4">
               <div>
-                <h4 class="text-lg font-extrabold text-navy-900">امسح الكود وشاركنا رأيك ✨</h4>
-                <p class="text-xs text-slate-500 mt-1">تقييمك بعد الجلسة يساعدنا نطور خدمتنا دائماً</p>
+                <h4 class="text-xl font-extrabold text-navy-900">رأيك يهمنا! ✨</h4>
+                <p class="text-xs text-slate-500 mt-1">امسح الكود بعد الجلسة لمشاركة تقييمك</p>
               </div>
               <div class="inline-flex items-center justify-center p-4 rounded-2xl bg-wood-50 border-2 border-dashed border-navy-900/20">
                 <div id="qrPreviewBox" class="w-44 h-44 flex items-center justify-center"></div>
               </div>
               <div class="text-gold-500 text-lg tracking-widest">★★★★★</div>
-              <p class="text-[11px] font-bold text-navy-800">الحمد لله على سلامتك — فريق LINE UP</p>
+              <p class="text-[11px] font-bold text-navy-800">نتمنى لك تمام الشفاء — فريق LINE UP</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- TAB 3: CLINIC SETTINGS (SAVED TO FIRESTORE) -->
+      <!-- =============================================================== -->
+      <!-- TAB 3: CLINIC SETTINGS (SAVED DIRECTLY TO settings/clinic)      -->
+      <!-- =============================================================== -->
       <div id="panelSettings" class="dash-panel hidden">
         <div class="bg-white/95 rounded-3xl p-6 border border-wood-200 shadow-clinic-sm max-w-xl space-y-5">
           <div>
-            <h3 class="text-base font-extrabold text-navy-900">إعدادات العيادة</h3>
-            <p class="text-xs text-slate-500 mt-0.5">يتم حفظ هذه الإعدادات مباشرة على السحابة وتطبيقها فوراً على جميع الأجهزة</p>
+            <h3 class="text-base font-extrabold text-navy-900">إعدادات عيادة LINE UP</h3>
+            <p class="text-xs text-slate-500 mt-0.5">تُحفظ هذه الإعدادات مباشرة في Firestore (<code class="font-latin text-navy-800">settings/clinic</code>) وتُطبق فوراً لجميع المرضى.</p>
           </div>
 
           <form id="settingsForm" class="space-y-4">
@@ -636,29 +718,29 @@
                 type="url"
                 dir="ltr"
                 required
-                class="w-full rounded-xl border border-wood-300 bg-wood-50 px-3.5 py-3 text-xs text-navy-900 focus:bg-white focus:border-navy-800 focus:outline-none"
-                placeholder="https://g.page/r/YOUR_CLINIC_CODE/review"
+                class="w-full rounded-xl border border-wood-300 bg-wood-50 px-3.5 py-3 text-xs font-latin text-navy-900 focus:bg-white focus:border-navy-800 focus:outline-none"
+                placeholder="https://g.page/r/YOUR_CLINIC_ID/review"
               />
-              <p class="mt-1.5 text-[11px] text-slate-400">
-                انسخ رابط التقييم المباشر (Ask for reviews) من حساب Google Business Profile الخاص بالعيادة.
+              <p class="mt-1.5 text-[11px] text-slate-500 leading-relaxed">
+                للحصول على رابط التقييم المباشر: افتح ملف نشاطك التجاري على <strong>Google Business Profile</strong> واضغط على <strong>"طلب مراجعات / Ask for reviews"</strong> ثم انسخ الرابط وضعه هنا.
               </p>
             </div>
 
             <div>
               <label for="settingsPinInput" class="block text-xs font-bold text-navy-900 mb-1.5">
-                الرقم السري للوحة التحكم (PIN)
+                تغيير الرقم السري للوحة التحكم (Admin PIN)
               </label>
               <input
                 id="settingsPinInput"
                 type="text"
                 inputmode="numeric"
-                maxlength="8"
+                maxlength="10"
                 required
-                class="w-full rounded-xl border border-wood-300 bg-wood-50 px-3.5 py-3 text-sm font-bold tracking-widest text-navy-900 focus:bg-white focus:border-navy-800 focus:outline-none"
+                class="w-full rounded-xl border border-wood-300 bg-wood-50 px-3.5 py-3 text-sm font-latin font-bold tracking-widest text-navy-900 focus:bg-white focus:border-navy-800 focus:outline-none"
                 placeholder="1234"
               />
-              <p class="mt-1.5 text-[11px] text-slate-400">
-                يمكنك فتح لوحة التحكم في أي وقت بإضافة <code class="px-1 rounded bg-wood-100 text-navy-900">#admin</code> لنهاية الرابط أو بالضغط 5 مرات متتالية على شعار LINE UP.
+              <p class="mt-1.5 text-[11px] text-slate-500 leading-relaxed">
+                لفتح لوحة التحكم لاحقاً: اضغط <strong>5 مرات سريعة</strong> على شعار LINE UP، أو أضف <code class="font-latin px-1 rounded bg-wood-100 text-navy-900">#admin</code> أو <code class="font-latin px-1 rounded bg-wood-100 text-navy-900">?admin=1</code> في نهاية الرابط.
               </p>
             </div>
 
@@ -667,7 +749,7 @@
               type="submit"
               class="w-full py-3.5 px-5 rounded-2xl bg-navy-900 hover:bg-navy-800 text-white font-bold text-sm shadow-lg transition-all active:scale-[0.98] cursor-pointer"
             >
-              حفظ الإعدادات
+              حفظ الإعدادات في Firebase
             </button>
           </form>
         </div>
@@ -676,19 +758,19 @@
     </div>
   </section>
 
-  <!-- ========================================================= -->
-  <!-- CUSTOM DELETE CONFIRMATION MODAL (No browser confirm())   -->
-  <!-- ========================================================= -->
-  <div id="deleteConfirmModal" class="print:hidden hidden fixed inset-0 z-50 flex items-center justify-center p-4">
-    <div id="deleteModalBackdrop" class="absolute inset-0 bg-navy-950/55 backdrop-blur-sm"></div>
+  <!-- ===================================================================== -->
+  <!-- CUSTOM DELETE CONFIRMATION MODAL (NEVER USES browser confirm())       -->
+  <!-- ===================================================================== -->
+  <div id="deleteConfirmModal" dir="rtl" class="print:hidden hidden fixed inset-0 z-50 flex items-center justify-center p-4">
+    <div id="deleteModalBackdrop" class="absolute inset-0 bg-navy-950/60 backdrop-blur-sm"></div>
     <div class="relative z-10 w-full max-w-xs rounded-3xl bg-white p-6 shadow-2xl border border-wood-200 text-center animate-pop-in">
       <div class="w-12 h-12 mx-auto mb-3 rounded-2xl bg-rose-50 text-rose-600 flex items-center justify-center">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
         </svg>
       </div>
-      <h3 class="text-base font-extrabold text-navy-900">حذف هذا التقييم؟</h3>
-      <p class="mt-1 text-xs text-slate-500">لا يمكن التراجع عن الحذف بعد التأكيد.</p>
+      <h3 class="text-base font-extrabold text-navy-900">تأكيد حذف التقييم</h3>
+      <p class="mt-1 text-xs text-slate-500">سيتم حذف هذا التقييم نهائياً من قاعدة البيانات.</p>
       <div class="mt-5 flex gap-2.5">
         <button id="confirmDeleteBtn" type="button" class="flex-1 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-colors cursor-pointer">
           نعم، حذف
@@ -700,101 +782,197 @@
     </div>
   </div>
 
-  <!-- ========================================================= -->
-  <!-- PRINT-ONLY DEDICATED RECEPTION QR STANDEE                 -->
-  <!-- ========================================================= -->
-  <section id="printOnlyStandee" class="hidden print:flex print:min-h-screen print:items-center print:justify-center print:bg-white print:p-8">
-    <div class="w-full max-w-md rounded-3xl border-4 border-navy-900 overflow-hidden bg-white">
-      <div class="px-8 pt-8 pb-6 text-center bg-wood-100 border-b-2 border-wood-200">
+  <!-- ===================================================================== -->
+  <!-- PRINT-ONLY DEDICATED RECEPTION QR CARD (CLEANLY CENTERED ON PAPER)    -->
+  <!-- ===================================================================== -->
+  <section id="printOnlyCard" dir="rtl" class="hidden print:flex print:min-h-screen print:items-center print:justify-center print:bg-white print:p-6">
+    <div class="w-full max-w-md rounded-3xl border-[3px] border-navy-900 overflow-hidden bg-white shadow-none">
+      <div class="px-8 pt-8 pb-6 text-center bg-wood-200 border-b-2 border-wood-300">
         <svg class="w-52 mx-auto h-auto" viewBox="0 0 280 148" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="163" cy="21" r="10.5" fill="#0B2259" />
-          <path d="M192 31C183 45 167 51 146 50C138 49.5 130 50.5 124 53L138 71.5C139.2 73 137.4 74.6 135.8 73.2L118.5 57.5C116.8 59.2 115.4 61 114.2 63L126.5 79.5C127.6 81 125.6 82.6 124 81.2L110.2 67.2C105.5 73.5 103 80.5 101.5 87C97.8 76.5 98.5 62.5 106.5 52.5C116.5 40 132 39 149 41C166 43 181 41.5 192 31Z" fill="#0B2259" />
-          <path d="M78 107C84.5 94.5 96.5 86.5 113.5 85.5C116.5 85.3 119.5 85.2 122.5 85L114.5 68.5C113.7 67 115.6 65.7 116.9 67L129.8 83.2C132 82.8 134.2 82.2 136.3 81.4L126.5 61C125.7 59.3 127.8 58 129.2 59.5L143.2 77.6C149.8 73.2 155 66 158 56.5C161.2 68.5 157.8 82.5 147.8 90.8C136.5 100.2 121 97.5 106.5 98.5C94.5 99.3 85 101.8 78 107Z" fill="#FFFFFF" stroke="#0B2259" stroke-width="1.5" />
-          <text x="140" y="139" text-anchor="middle" fill="#0B2259" font-family="Montserrat, sans-serif" font-weight="800" font-size="33" letter-spacing="5.5">LINE UP</text>
+          <circle cx="163" cy="21" r="10.5" fill="#0B2154" />
+          <path d="M192 31C183 45 167 51 146 50C138 49.5 130 50.5 124 53L138 71.5C139.2 73 137.4 74.6 135.8 73.2L118.5 57.5C116.8 59.2 115.4 61 114.2 63L126.5 79.5C127.6 81 125.6 82.6 124 81.2L110.2 67.2C105.5 73.5 103 80.5 101.5 87C97.8 76.5 98.5 62.5 106.5 52.5C116.5 40 132 39 149 41C166 43 181 41.5 192 31Z" fill="#0B2154" />
+          <path d="M78 107C84.5 94.5 96.5 86.5 113.5 85.5C116.5 85.3 119.5 85.2 122.5 85L114.5 68.5C113.7 67 115.6 65.7 116.9 67L129.8 83.2C132 82.8 134.2 82.2 136.3 81.4L126.5 61C125.7 59.3 127.8 58 129.2 59.5L143.2 77.6C149.8 73.2 155 66 158 56.5C161.2 68.5 157.8 82.5 147.8 90.8C136.5 100.2 121 97.5 106.5 98.5C94.5 99.3 85 101.8 78 107Z" fill="#FFFFFF" stroke="#0B2154" stroke-width="1.5" />
+          <text x="140" y="139" text-anchor="middle" fill="#0B2154" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="34" letter-spacing="5">LINE UP</text>
         </svg>
-        <p class="mt-2 text-sm font-bold text-navy-800">عيادة العلاج الطبيعي والتأهيل</p>
+        <p class="mt-2 text-sm font-bold text-navy-900">للعلاج الطبيعي والتأهيل</p>
       </div>
       <div class="p-8 text-center space-y-5">
         <div>
-          <h2 class="text-2xl font-extrabold text-navy-900">امسح الكود وشاركنا رأيك</h2>
-          <p class="text-sm text-slate-600 mt-1">كيف كانت جلستك اليوم؟ رأيك يهمنا دائماً</p>
+          <h2 class="text-2xl font-extrabold text-navy-900">رأيك يهمنا!</h2>
+          <p class="text-sm text-slate-600 mt-1">امسح الكود بعد الجلسة لمشاركة تقييمك</p>
         </div>
         <div class="inline-flex items-center justify-center p-5 rounded-3xl border-2 border-navy-900/20 bg-white">
           <div id="qrPrintBox" class="w-56 h-56 flex items-center justify-center"></div>
         </div>
         <div class="text-2xl text-gold-500 tracking-widest">★★★★★</div>
-        <p class="text-sm font-bold text-navy-900">الحمد لله على سلامتك — فريق LINE UP</p>
+        <p class="text-sm font-bold text-navy-900">نتمنى لك تمام الشفاء — فريق LINE UP</p>
       </div>
     </div>
   </section>
 
-  <!-- ========================================================= -->
-  <!-- TOAST NOTIFICATION CONTAINER                              -->
-  <!-- ========================================================= -->
+  <!-- ===================================================================== -->
+  <!-- POLISHED TOAST NOTIFICATION STACK                                     -->
+  <!-- ===================================================================== -->
   <div id="toastContainer" class="print:hidden fixed top-5 inset-x-4 sm:inset-x-auto sm:left-1/2 sm:-translate-x-1/2 z-[60] flex flex-col items-center gap-2 pointer-events-none"></div>
 
-  <!-- ========================================================= -->
-  <!-- FIREBASE FIRESTORE & APPLICATION LOGIC (ES MODULE)        -->
-  <!-- ========================================================= -->
+  <!-- ===================================================================== -->
+  <!-- FIREBASE MODULAR SDK v10.13.2 & APPLICATION LOGIC                     -->
+  <!-- ===================================================================== -->
   <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
     import {
-      getAuth,
-      signInAnonymously,
-      signInWithCustomToken,
-      onAuthStateChanged
-    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import {
+      initializeFirestore,
       getFirestore,
       collection,
-      doc,
       addDoc,
+      onSnapshot,
+      query,
+      orderBy,
+      doc,
+      getDoc,
       setDoc,
       updateDoc,
       deleteDoc,
-      onSnapshot
-    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
-    // =========================================================
-    // 1. CONSTANTS & CONFIGURATION
-    // =========================================================
-    const DEFAULT_GMAPS_URL = "https://www.google.com/maps/search/?api=1&query=LINE+UP+Physiotherapy+Clinic";
-    const DEFAULT_ADMIN_PIN = "1234";
-
-    const RATING_LABELS = {
-      1: { text: "غير راضٍ 😞", cls: "bg-rose-50 text-rose-700 border-rose-200" },
-      2: { text: "مقبول 😕", cls: "bg-amber-50 text-amber-700 border-amber-200" },
-      3: { text: "جيد 🙂", cls: "bg-blue-50 text-navy-800 border-blue-200" },
-      4: { text: "جيد جداً 😊", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-      5: { text: "ممتاز جداً 🌟", cls: "bg-amber-50 text-gold-600 border-gold-400/60" }
+    // =====================================================================
+    // 1. DIRECT PRODUCTION FIREBASE CONFIGURATION (maps-9dcd4)
+    // =====================================================================
+    const firebaseConfig = {
+      apiKey: "AIzaSyANa8By4RMsySstdc90N_bPqCbaU4L_cSI",
+      authDomain: "maps-9dcd4.firebaseapp.com",
+      projectId: "maps-9dcd4",
+      storageBucket: "maps-9dcd4.firebasestorage.app",
+      messagingSenderId: "684280511537",
+      appId: "1:684280511537:web:c1d5c380f0f1dcb5c6e910",
+      measurementId: "G-6XLSLYZ66B"
     };
 
-    // Environment-injected Firebase globals (safe fallback for external hosting)
-    const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
-    let firebaseConfig = null;
+    const app = initializeApp(firebaseConfig);
+
+    // Force Long Polling to prevent "client is offline" WebChannel errors in iframes,
+    // mobile WebViews, proxies, and restricted networks.
+    let db;
     try {
-      if (typeof __firebase_config !== "undefined" && __firebase_config) {
-        firebaseConfig = JSON.parse(__firebase_config);
-      }
-    } catch (e) {
-      console.error("Failed to parse __firebase_config:", e);
+      db = initializeFirestore(app, {
+        experimentalForceLongPolling: true,
+        useFetchStreams: false
+      });
+    } catch (_) {
+      db = getFirestore(app);
     }
 
-    // Optional: If hosting outside this platform on your own domain, paste your Firebase Web Config here:
-    // firebaseConfig = { apiKey: "...", authDomain: "...", projectId: "...", appId: "..." };
+    // Optional Firebase Analytics (safely wrapped so unsupported environments never break)
+    try {
+      import("https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js")
+        .then(({ getAnalytics, isSupported }) => {
+          isSupported().then((ok) => { if (ok) getAnalytics(app); }).catch(() => {});
+        })
+        .catch(() => {});
+    } catch (_) {}
 
-    // =========================================================
-    // 2. APPLICATION STATE
-    // =========================================================
+    // =====================================================================
+    // 2. CONSTANTS & BILINGUAL (AR/EN) TRANSLATIONS
+    // =====================================================================
+    const DEFAULT_GMAPS_URL = "https://www.google.com/maps/search/?api=1&query=LINE+UP+Physiotherapy+Clinic";
+    const DEFAULT_ADMIN_PIN = "1234";
+    const LOCAL_SETTINGS_KEY = "lineup_clinic_settings_v1";
+    const LOCAL_FEEDBACKS_KEY = "lineup_clinic_feedbacks_v1";
+
+    const I18N = {
+      ar: {
+        dir: "rtl",
+        toggleBtn: "EN",
+        subtitle: "للعلاج الطبيعي والتأهيل",
+        footerSub: "عيادة العلاج الطبيعي والتأهيل",
+        welcomeTitle: "نتمنى لك تمام الشفاء! شاركنا تقييمك للجلسة",
+        welcomeSub: "رأيك وملاحظاتك يساعدوننا دائماً على تقديم أفضل رعاية لك",
+        selectStarsHint: "اضغط على النجوم للتقييم",
+        starLabels: {
+          1: { text: "سيئة — نعتذر بشدة 😞", cls: "bg-rose-50 text-rose-700 border-rose-200" },
+          2: { text: "تحتاج تحسين 😕", cls: "bg-amber-50 text-amber-700 border-amber-200" },
+          3: { text: "جيدة 🙂", cls: "bg-blue-50 text-navy-800 border-blue-200" },
+          4: { text: "جيدة جداً 😊", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+          5: { text: "ممتازة جداً 🌟", cls: "bg-amber-50 text-gold-600 border-gold-400/60" }
+        },
+        notesLabel: "ملاحظاتك أو أي مشكلة واجهتك",
+        notesPlaceholder: "ملاحظاتك أو أي مشكلة واجهتك أثناء الجلسة...",
+        contactToggle: "هل تود أن نتواصل معك؟ (اختياري)",
+        reassuranceNote: "يهمنا حل أي مشكلة فوراً — سيب رقمك لو حابب نتواصل معك",
+        nameLabel: "الاسم (اختياري)",
+        namePlaceholder: "الاسم",
+        phoneLabel: "رقم الموبايل (اختياري)",
+        submitBtn: "إرسال التقييم",
+        submittingBtn: "جاري الإرسال...",
+        errNoStar: "من فضلك اختر تقييمك بالنجوم أولاً ⭐",
+        errSave: "تعذر حفظ التقييم حالياً، تأكد من اتصال الإنترنت أو إعدادات Firestore",
+        toastSaved: "تم إرسال تقييمك بنجاح!",
+        successTitleHigh: "شكراً لك على تقييمك الرائع! 💙",
+        successMsgHigh: "سعداء جداً بتجربتك معنا اليوم، ونتمنى لك دوام الصحة والعافية مع فريق LINE UP.",
+        successTitleLow: "شكراً لصراحتك وثقتك فينا 🙏",
+        successMsgLow: "ملاحظتك تهمنا جداً لتقديم مستوى رعاية يليق بك.",
+        successApology: "وصلت ملاحظتك فوراً لإدارة عيادة LINE UP وسنتابعها بكل اهتمام لضمان راحتك التامة في زياراتك القادمة.",
+        gmapsTitle: "شاركنا رأيك على Google Maps",
+        gmapsSub: "تقييمك يساعد الآخرين في اختيار الرعاية المناسبة ويشجع فريقنا دائماً.",
+        copyBtn: "نسخ ملاحظتي للصقها على جوجل",
+        copiedBtn: "تم النسخ ✓",
+        toastCopied: "تم نسخ ملاحظتك! يمكنك لصقها مباشرة على Google Maps ✅",
+        gmapsBtn: "قيّم العيادة على Google Maps",
+        resetBtn: "إرسال تقييم جديد"
+      },
+      en: {
+        dir: "ltr",
+        toggleBtn: "عربي",
+        subtitle: "Physiotherapy & Rehabilitation",
+        footerSub: "Physiotherapy & Rehabilitation Clinic",
+        welcomeTitle: "Wishing you a speedy recovery! Rate your session",
+        welcomeSub: "Your feedback helps us deliver the best care every visit",
+        selectStarsHint: "Tap the stars to rate your session",
+        starLabels: {
+          1: { text: "Poor — We're sorry 😞", cls: "bg-rose-50 text-rose-700 border-rose-200" },
+          2: { text: "Needs Improvement 😕", cls: "bg-amber-50 text-amber-700 border-amber-200" },
+          3: { text: "Good 🙂", cls: "bg-blue-50 text-navy-800 border-blue-200" },
+          4: { text: "Very Good 😊", cls: "bg-emerald-50 text-emerald-700 border-emerald-200" },
+          5: { text: "Excellent 🌟", cls: "bg-amber-50 text-gold-600 border-gold-400/60" }
+        },
+        notesLabel: "Your notes or any issue you faced",
+        notesPlaceholder: "Share your thoughts or any issue you experienced during your session...",
+        contactToggle: "Would you like us to contact you? (Optional)",
+        reassuranceNote: "We care about resolving any issue right away — leave your number if you'd like us to reach out.",
+        nameLabel: "Name (Optional)",
+        namePlaceholder: "Your name",
+        phoneLabel: "Phone Number (Optional)",
+        submitBtn: "Submit Feedback",
+        submittingBtn: "Sending...",
+        errNoStar: "Please select a star rating first ⭐",
+        errSave: "Could not save your feedback. Please check your connection.",
+        toastSaved: "Thank you! Feedback submitted successfully.",
+        successTitleHigh: "Thank you for your great rating! 💙",
+        successMsgHigh: "We're thrilled you had a great session. Wishing you lasting health and wellness!",
+        successTitleLow: "Thank you for your honest feedback 🙏",
+        successMsgLow: "Your input is valuable and helps us improve our care for you.",
+        successApology: "Your note has been sent directly to LINE UP clinic management so we can follow up immediately.",
+        gmapsTitle: "Share Your Review on Google Maps",
+        gmapsSub: "Your review helps others find trusted care and motivates our team.",
+        copyBtn: "Copy my review for Google Maps",
+        copiedBtn: "Copied ✓",
+        toastCopied: "Comment copied! You can paste it directly on Google Maps ✅",
+        gmapsBtn: "Review Clinic on Google Maps",
+        resetBtn: "Submit another review"
+      }
+    };
+
+    // =====================================================================
+    // 3. APPLICATION STATE
+    // =====================================================================
     const state = {
-      db: null,
-      auth: null,
-      user: null,
-      firestoreReady: false,
+      lang: "ar",
       selectedRating: 0,
       hoveredRating: 0,
       contactExpanded: false,
-      lastSubmittedMessage: "",
+      lastSubmittedRating: 0,
+      lastSubmittedComment: "",
       adminUnlocked: false,
       activeDashTab: "panelFeedbacks",
       activeFilter: "all",
@@ -805,222 +983,286 @@
       },
       feedbacks: [],
       unsubFeedbacks: null,
-      unsubSettings: null,
-      logoTapTimestamps: []
+      snapshotWatchdog: null,
+      firestoreOnline: false,
+      logoTaps: []
     };
 
-    // =========================================================
-    // 3. DOM ELEMENT REFERENCES
-    // =========================================================
+    // =====================================================================
+    // 4. DOM ELEMENT REFERENCES
+    // =====================================================================
     const els = {
-      // Views
-      patientAppView: document.getElementById("patientAppView"),
-      adminPinView: document.getElementById("adminPinView"),
-      adminDashboardView: document.getElementById("adminDashboardView"),
-
-      // Patient Form
+      // Patient View
+      patientView: document.getElementById("patientView"),
+      langToggleBtn: document.getElementById("langToggleBtn"),
       secretLogoTrigger: document.getElementById("secretLogoTrigger"),
-      patientFormCard: document.getElementById("patientFormCard"),
+      txtSubtitle: document.getElementById("txtSubtitle"),
+      txtFooterSub: document.getElementById("txtFooterSub"),
+      footerYear: document.getElementById("footerYear"),
+
+      // Step 1 Form
+      stepFormContainer: document.getElementById("stepFormContainer"),
+      txtWelcomeTitle: document.getElementById("txtWelcomeTitle"),
+      txtWelcomeSub: document.getElementById("txtWelcomeSub"),
       feedbackForm: document.getElementById("feedbackForm"),
       starBtns: document.querySelectorAll(".star-btn"),
       ratingStatusPill: document.getElementById("ratingStatusPill"),
-      feedbackMessage: document.getElementById("feedbackMessage"),
+      txtNotesLabel: document.getElementById("txtNotesLabel"),
+      feedbackComment: document.getElementById("feedbackComment"),
       contactToggleBtn: document.getElementById("contactToggleBtn"),
-      contactToggleDot: document.getElementById("contactToggleDot"),
-      contactCheckIcon: document.getElementById("contactCheckIcon"),
+      contactToggleBox: document.getElementById("contactToggleBox"),
+      contactToggleCheck: document.getElementById("contactToggleCheck"),
+      txtContactToggle: document.getElementById("txtContactToggle"),
       contactChevron: document.getElementById("contactChevron"),
-      contactFieldsBox: document.getElementById("contactFieldsBox"),
+      contactFieldsWrap: document.getElementById("contactFieldsWrap"),
+      lowRatingReassurance: document.getElementById("lowRatingReassurance"),
+      txtReassuranceNote: document.getElementById("txtReassuranceNote"),
+      txtNameLabel: document.getElementById("txtNameLabel"),
       patientName: document.getElementById("patientName"),
+      txtPhoneLabel: document.getElementById("txtPhoneLabel"),
       patientPhone: document.getElementById("patientPhone"),
       submitFeedbackBtn: document.getElementById("submitFeedbackBtn"),
-      submitBtnLabel: document.getElementById("submitBtnLabel"),
+      submitBtnText: document.getElementById("submitBtnText"),
       submitBtnArrow: document.getElementById("submitBtnArrow"),
       submitBtnSpinner: document.getElementById("submitBtnSpinner"),
 
-      // Thank You & Google Maps
-      thankYouCard: document.getElementById("thankYouCard"),
-      thankYouHeading: document.getElementById("thankYouHeading"),
-      thankYouBody: document.getElementById("thankYouBody"),
-      lowRatingBanner: document.getElementById("lowRatingBanner"),
-      copyNoteWrap: document.getElementById("copyNoteWrap"),
-      copyNotePreview: document.getElementById("copyNotePreview"),
-      copyNoteBtn: document.getElementById("copyNoteBtn"),
+      // Step 2 Post-Submission
+      stepSuccessContainer: document.getElementById("stepSuccessContainer"),
+      successTitle: document.getElementById("successTitle"),
+      successMessage: document.getElementById("successMessage"),
+      successFollowupNote: document.getElementById("successFollowupNote"),
+      txtSuccessApology: document.getElementById("txtSuccessApology"),
+      txtGmapsTitle: document.getElementById("txtGmapsTitle"),
+      txtGmapsSub: document.getElementById("txtGmapsSub"),
+      copyCommentWrap: document.getElementById("copyCommentWrap"),
+      copyCommentPreview: document.getElementById("copyCommentPreview"),
+      copyCommentBtn: document.getElementById("copyCommentBtn"),
+      copyCommentBtnText: document.getElementById("copyCommentBtnText"),
       googleMapsReviewLink: document.getElementById("googleMapsReviewLink"),
-      returnHomeBtn: document.getElementById("returnHomeBtn"),
-      footerYear: document.getElementById("footerYear"),
+      txtGmapsBtn: document.getElementById("txtGmapsBtn"),
+      resetFormBtn: document.getElementById("resetFormBtn"),
 
-      // PIN Screen
+      // PIN Modal
+      adminPinModal: document.getElementById("adminPinModal"),
+      pinModalBackdrop: document.getElementById("pinModalBackdrop"),
       pinLoginForm: document.getElementById("pinLoginForm"),
       pinInput: document.getElementById("pinInput"),
       pinErrorMsg: document.getElementById("pinErrorMsg"),
-      cancelPinBtn: document.getElementById("cancelPinBtn"),
+      closePinModalBtn: document.getElementById("closePinModalBtn"),
 
       // Admin Dashboard
-      dbStatusBadge: document.getElementById("dbStatusBadge"),
-      backToPatientBtn: document.getElementById("backToPatientBtn"),
+      adminDashboardView: document.getElementById("adminDashboardView"),
+      firebaseStatusBadge: document.getElementById("firebaseStatusBadge"),
+      firestoreErrorAlert: document.getElementById("firestoreErrorAlert"),
+      firestoreErrorTitle: document.getElementById("firestoreErrorTitle"),
+      firestoreErrorText: document.getElementById("firestoreErrorText"),
+      logoutDashboardBtn: document.getElementById("logoutDashboardBtn"),
       kpiTotal: document.getElementById("kpiTotal"),
       kpiAvg: document.getElementById("kpiAvg"),
-      kpiFiveStar: document.getElementById("kpiFiveStar"),
-      kpiUnresolved: document.getElementById("kpiUnresolved"),
+      kpiComplaints: document.getElementById("kpiComplaints"),
+      kpiPending: document.getElementById("kpiPending"),
       dashTabBtns: document.querySelectorAll(".dash-tab-btn"),
       dashPanels: document.querySelectorAll(".dash-panel"),
       filterBtns: document.querySelectorAll(".fb-filter-btn"),
       exportCsvBtn: document.getElementById("exportCsvBtn"),
       adminFeedbackList: document.getElementById("adminFeedbackList"),
 
-      // QR Standee
+      // QR Tab
       qrTargetUrlInput: document.getElementById("qrTargetUrlInput"),
       qrPreviewBox: document.getElementById("qrPreviewBox"),
       qrPrintBox: document.getElementById("qrPrintBox"),
-      printStandeeBtn: document.getElementById("printStandeeBtn"),
+      printQrCardBtn: document.getElementById("printQrCardBtn"),
+      downloadQrPngBtn: document.getElementById("downloadQrPngBtn"),
 
-      // Settings
+      // Settings Tab
       settingsForm: document.getElementById("settingsForm"),
       settingsGmapsInput: document.getElementById("settingsGmapsInput"),
       settingsPinInput: document.getElementById("settingsPinInput"),
       saveSettingsBtn: document.getElementById("saveSettingsBtn"),
 
-      // Delete Confirmation Modal
+      // Delete Modal
       deleteConfirmModal: document.getElementById("deleteConfirmModal"),
       deleteModalBackdrop: document.getElementById("deleteModalBackdrop"),
       confirmDeleteBtn: document.getElementById("confirmDeleteBtn"),
       cancelDeleteBtn: document.getElementById("cancelDeleteBtn"),
 
-      // Toast
+      // Toast Container
       toastContainer: document.getElementById("toastContainer")
     };
 
-    // =========================================================
-    // 4. TOAST NOTIFICATIONS (REPLACES alert())
-    // =========================================================
-    function showToast(message, type = "info") {
-      const toast = document.createElement("div");
-      const bg =
-        type === "success"
-          ? "bg-emerald-600 text-white"
-          : type === "error"
-          ? "bg-rose-600 text-white"
-          : "bg-navy-900 text-white";
-
-      toast.className = `pointer-events-auto px-4 py-3 rounded-2xl shadow-xl text-xs sm:text-sm font-bold max-w-sm text-center animate-fade-up ${bg}`;
-      toast.textContent = message;
-      els.toastContainer.appendChild(toast);
-
-      setTimeout(() => {
-        toast.classList.add("opacity-0", "-translate-y-2", "transition-all", "duration-300");
-        setTimeout(() => toast.remove(), 320);
-      }, 3000);
+    // =====================================================================
+    // 6. FIRESTORE CONNECTION STATUS, TIMEOUTS & LOCAL FALLBACK CACHE
+    // =====================================================================
+    function withTimeout(promise, ms = 5000) {
+      let timerId;
+      const timeoutPromise = new Promise((_, reject) => {
+        timerId = setTimeout(() => {
+          const err = new Error("Firestore request timed out (client offline or database not created yet).");
+          err.code = "unavailable";
+          reject(err);
+        }, ms);
+      });
+      return Promise.race([promise, timeoutPromise]).finally(() => clearTimeout(timerId));
     }
 
-    // =========================================================
-    // 5. FIREBASE AUTH & FIRESTORE REAL-TIME SUBSCRIPTIONS
-    // =========================================================
-    function getFeedbacksCollectionRef() {
-      return collection(state.db, "artifacts", appId, "public", "data", "feedbacks");
-    }
-
-    function getSettingsDocRef() {
-      return doc(state.db, "artifacts", appId, "public", "data", "settings", "clinicConfig");
-    }
-
-    async function initFirebase() {
-      if (!firebaseConfig) {
-        updateDbStatusUI(false, "وضع المعاينة المحلي");
-        renderAdminDashboard();
-        return;
+    function readLocalJson(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch (_) {
+        return fallback;
       }
+    }
+
+    function writeLocalJson(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch (_) {}
+    }
+
+    function isOfflineOrUnavailableError(err) {
+      const code = String(err?.code || "").toLowerCase();
+      const msg = String(err?.message || "").toLowerCase();
+      return (
+        code === "unavailable" ||
+        code === "failed-precondition" ||
+        msg.includes("offline") ||
+        msg.includes("timed out") ||
+        msg.includes("network")
+      );
+    }
+
+    function setConnectionStatus(status, errorDetail = "") {
+      if (status === "online") {
+        state.firestoreOnline = true;
+        els.firebaseStatusBadge.className =
+          "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30";
+        els.firebaseStatusBadge.innerHTML =
+          '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span><span>متصل بـ <span class="font-latin">maps-9dcd4</span></span>';
+        els.firestoreErrorAlert.classList.add("hidden");
+      } else if (status === "offline") {
+        state.firestoreOnline = false;
+        els.firebaseStatusBadge.className =
+          "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-amber-500/25 text-amber-200 border border-amber-400/40";
+        els.firebaseStatusBadge.innerHTML =
+          '<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><span>وضع محلي (Firestore غير متصل)</span>';
+        els.firestoreErrorAlert.classList.remove("hidden");
+        els.firestoreErrorTitle.textContent = "تعذر الاتصال بـ Firestore (العمل بالوضع المحلي مؤقتاً)";
+        els.firestoreErrorText.innerHTML = `تأكد من خطوتين في حسابك على <strong class="font-latin">Firebase Console</strong> لمشروع <code class="font-latin font-bold">maps-9dcd4</code>: (1) الدخول إلى <strong>Build &gt; Firestore Database</strong> والضغط على <strong>Create database</strong> إذا لم تكن قد أنشأتها بعد، (2) التأكد من قواعد الأمان (<strong>Rules</strong>) التالية:`;
+      } else {
+        state.firestoreOnline = false;
+        els.firebaseStatusBadge.className =
+          "inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-500/25 text-rose-200 border border-rose-400/40";
+        els.firebaseStatusBadge.innerHTML =
+          '<span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span><span>خطأ صلاحيات Firestore</span>';
+        els.firestoreErrorAlert.classList.remove("hidden");
+        els.firestoreErrorTitle.textContent = "تنبيه صلاحيات قاعدة بيانات Firebase (Firestore Rules)";
+        els.firestoreErrorText.innerHTML = `تعذر الوصول إلى قاعدة البيانات (${errorDetail ? `<code class="font-latin font-bold">${escapeHtml(errorDetail)}</code>` : "permission-denied"}). تأكد من تفعيل <strong>Firestore Database</strong> في مشروع <code class="font-latin font-bold">maps-9dcd4</code> ووضع القواعد التالية في تبويب <strong>Rules</strong>:`;
+      }
+    }
+
+    async function loadClinicSettings(timeoutMs = 5000) {
+      // 1. Hydrate immediately from local cache so UI is never blocked
+      const cached = readLocalJson(LOCAL_SETTINGS_KEY, null);
+      if (cached) {
+        state.settings.googleMapsUrl = cached.googleMapsUrl || DEFAULT_GMAPS_URL;
+        state.settings.adminPin = cached.adminPin ? String(cached.adminPin) : DEFAULT_ADMIN_PIN;
+        syncSettingsToUI();
+      }
+
+      // 2. Sync live settings from Firestore with timeout protection
+      try {
+        const settingsRef = doc(db, "settings", "clinic");
+        const snap = await withTimeout(getDoc(settingsRef), timeoutMs);
+
+        if (snap.exists()) {
+          const data = snap.data();
+          state.settings.googleMapsUrl = data.googleMapsUrl || DEFAULT_GMAPS_URL;
+          state.settings.adminPin = data.adminPin ? String(data.adminPin) : DEFAULT_ADMIN_PIN;
+          writeLocalJson(LOCAL_SETTINGS_KEY, state.settings);
+        }
+
+        syncSettingsToUI();
+        setConnectionStatus("online");
+      } catch (err) {
+        if (isOfflineOrUnavailableError(err)) {
+          console.warn("Firestore offline/unavailable while loading settings; using local cache.", err.code || err.message);
+          setConnectionStatus("offline", err.code || err.message);
+        } else {
+          console.warn("Firestore permission error while loading settings:", err.code || err.message);
+          setConnectionStatus("permission", err.code || err.message);
+        }
+      }
+    }
+
+    function subscribeToFeedbacksRealtime() {
+      if (state.unsubFeedbacks) {
+        state.unsubFeedbacks();
+        state.unsubFeedbacks = null;
+      }
+      if (state.snapshotWatchdog) {
+        clearTimeout(state.snapshotWatchdog);
+        state.snapshotWatchdog = null;
+      }
+
+      // Show any locally cached feedbacks immediately while Firestore connects
+      const localList = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
+      if (localList.length > 0) {
+        state.feedbacks = localList;
+        renderAdminDashboard();
+      }
+
+      let receivedServerSnapshot = false;
+
+      // Watchdog: if Firestore never replies (e.g., DB not created yet or offline), stop loading spinner cleanly
+      state.snapshotWatchdog = setTimeout(() => {
+        if (!receivedServerSnapshot) {
+          setConnectionStatus("offline");
+          state.feedbacks = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
+          renderAdminDashboard();
+        }
+      }, 6000);
 
       try {
-        const app = initializeApp(firebaseConfig);
-        state.auth = getAuth(app);
-        state.db = getFirestore(app);
-
-        // RULE 3: Authenticate FIRST (custom token priority, fallback to anonymous)
-        const token = typeof __initial_auth_token !== "undefined" ? __initial_auth_token : null;
-        if (token) {
-          await signInWithCustomToken(state.auth, token);
-        } else {
-          await signInAnonymously(state.auth);
-        }
-
-        // Track auth state and attach real-time Firestore listeners once signed in
-        onAuthStateChanged(state.auth, (user) => {
-          state.user = user;
-          if (user) {
-            state.firestoreReady = true;
-            updateDbStatusUI(true, "متصل لحظياً");
-            subscribeToClinicSettings();
-            subscribeToFeedbacks();
+        const q = query(collection(db, "feedbacks"), orderBy("createdAt", "desc"));
+        state.unsubFeedbacks = onSnapshot(
+          q,
+          (snapshot) => {
+            receivedServerSnapshot = true;
+            if (state.snapshotWatchdog) {
+              clearTimeout(state.snapshotWatchdog);
+              state.snapshotWatchdog = null;
+            }
+            const list = [];
+            snapshot.forEach((docSnap) => {
+              list.push({ id: docSnap.id, ...docSnap.data() });
+            });
+            state.feedbacks = list;
+            writeLocalJson(LOCAL_FEEDBACKS_KEY, list.map((item) => ({
+              ...item,
+              createdAt: parseTimestamp(item.createdAt)?.toISOString() || new Date().toISOString()
+            })));
+            setConnectionStatus("online");
+            renderAdminDashboard();
+          },
+          (error) => {
+            receivedServerSnapshot = true;
+            if (state.snapshotWatchdog) {
+              clearTimeout(state.snapshotWatchdog);
+              state.snapshotWatchdog = null;
+            }
+            console.warn("Firestore onSnapshot error:", error.code || error.message);
+            setConnectionStatus(isOfflineOrUnavailableError(error) ? "offline" : "permission", error.code || error.message);
+            state.feedbacks = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
+            renderAdminDashboard();
           }
-        });
+        );
       } catch (err) {
-        console.error("Firebase initialization error:", err);
-        updateDbStatusUI(false, "تعذر الاتصال السحابي");
+        console.warn("Failed to attach Firestore listener:", err.code || err.message);
+        setConnectionStatus(isOfflineOrUnavailableError(err) ? "offline" : "permission", err.code || err.message);
+        state.feedbacks = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
+        renderAdminDashboard();
       }
-    }
-
-    function updateDbStatusUI(isOnline, label) {
-      if (!els.dbStatusBadge) return;
-      els.dbStatusBadge.className = isOnline
-        ? "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30"
-        : "inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-200 border border-amber-400/30";
-      els.dbStatusBadge.innerHTML = `<span class="w-1.5 h-1.5 rounded-full ${isOnline ? "bg-emerald-400 animate-pulse" : "bg-amber-300"}"></span><span>${label}</span>`;
-    }
-
-    function subscribeToClinicSettings() {
-      if (!state.user || !state.db) return;
-      if (state.unsubSettings) state.unsubSettings();
-
-      state.unsubSettings = onSnapshot(
-        getSettingsDocRef(),
-        (snap) => {
-          if (snap.exists()) {
-            const data = snap.data();
-            state.settings.googleMapsUrl = data.googleMapsUrl || DEFAULT_GMAPS_URL;
-            state.settings.adminPin = data.adminPin ? String(data.adminPin) : DEFAULT_ADMIN_PIN;
-          } else {
-            // Seed default clinic settings document if none exists yet
-            setDoc(getSettingsDocRef(), {
-              googleMapsUrl: DEFAULT_GMAPS_URL,
-              adminPin: DEFAULT_ADMIN_PIN
-            }, { merge: true }).catch((e) => console.warn("Settings seed warning:", e));
-          }
-          syncSettingsToUI();
-        },
-        (error) => {
-          console.error("Settings snapshot error:", error);
-        }
-      );
-    }
-
-    function subscribeToFeedbacks() {
-      if (!state.user || !state.db) return;
-      if (state.unsubFeedbacks) state.unsubFeedbacks();
-
-      // RULE 2: Simple collection query without orderBy/where; sort & filter in memory
-      state.unsubFeedbacks = onSnapshot(
-        getFeedbacksCollectionRef(),
-        (snapshot) => {
-          const rows = [];
-          snapshot.forEach((docSnap) => {
-            rows.push({ id: docSnap.id, ...docSnap.data() });
-          });
-
-          // Sort newest first in JS memory
-          rows.sort((a, b) => {
-            const timeA = new Date(a.createdAt || 0).getTime();
-            const timeB = new Date(b.createdAt || 0).getTime();
-            return timeB - timeA;
-          });
-
-          state.feedbacks = rows;
-          renderAdminDashboard();
-        },
-        (error) => {
-          console.error("Feedbacks snapshot error:", error);
-          showToast("حدث خطأ أثناء مزامنة التقييمات", "error");
-        }
-      );
     }
 
     function syncSettingsToUI() {
@@ -1029,10 +1271,45 @@
       els.settingsPinInput.value = state.settings.adminPin || DEFAULT_ADMIN_PIN;
     }
 
-    // =========================================================
-    // 6. PATIENT FORM INTERACTIONS (STARS, CONTACT, SUBMIT)
-    // =========================================================
+    // =====================================================================
+    // 7. BILINGUAL UI UPDATE (AR / EN)
+    // =====================================================================
+    function applyLanguage() {
+      const t = I18N[state.lang];
+      document.documentElement.lang = state.lang;
+      document.documentElement.dir = t.dir;
+
+      els.langToggleBtn.textContent = t.toggleBtn;
+      els.txtSubtitle.textContent = t.subtitle;
+      els.txtFooterSub.textContent = t.footerSub;
+      els.txtWelcomeTitle.textContent = t.welcomeTitle;
+      els.txtWelcomeSub.textContent = t.welcomeSub;
+      els.txtNotesLabel.textContent = t.notesLabel;
+      els.feedbackComment.placeholder = t.notesPlaceholder;
+      els.txtContactToggle.textContent = t.contactToggle;
+      els.txtReassuranceNote.textContent = t.reassuranceNote;
+      els.txtNameLabel.textContent = t.nameLabel;
+      els.patientName.placeholder = t.namePlaceholder;
+      els.txtPhoneLabel.textContent = t.phoneLabel;
+      els.submitBtnText.textContent = t.submitBtn;
+      els.txtSuccessApology.textContent = t.successApology;
+      els.txtGmapsTitle.textContent = t.gmapsTitle;
+      els.txtGmapsSub.textContent = t.gmapsSub;
+      els.copyCommentBtnText.textContent = t.copyBtn;
+      els.txtGmapsBtn.textContent = t.gmapsBtn;
+      els.resetFormBtn.textContent = t.resetBtn;
+
+      renderStars();
+      if (!els.stepSuccessContainer.classList.contains("hidden")) {
+        updateSuccessTexts(state.lastSubmittedRating);
+      }
+    }
+
+    // =====================================================================
+    // 8. PATIENT EXPERIENCE LOGIC (STARS, CONTACT, SUBMIT, COPY)
+    // =====================================================================
     function renderStars() {
+      const t = I18N[state.lang];
       const active = state.hoveredRating || state.selectedRating;
 
       els.starBtns.forEach((btn) => {
@@ -1047,201 +1324,250 @@
         }
       });
 
-      if (active > 0 && RATING_LABELS[active]) {
-        const meta = RATING_LABELS[active];
+      if (active > 0 && t.starLabels[active]) {
+        const meta = t.starLabels[active];
         els.ratingStatusPill.textContent = meta.text;
         els.ratingStatusPill.className = `inline-flex items-center px-4 py-1 rounded-full text-xs sm:text-sm font-bold border transition-all duration-300 ${meta.cls}`;
       } else {
-        els.ratingStatusPill.textContent = "اختر عدد النجوم للتقييم";
+        els.ratingStatusPill.textContent = t.selectStarsHint;
         els.ratingStatusPill.className = "inline-flex items-center px-4 py-1 rounded-full text-xs sm:text-sm font-bold bg-white text-slate-400 border border-wood-200 transition-all duration-300";
       }
     }
 
     function setContactExpanded(open) {
       state.contactExpanded = open;
-      els.contactFieldsBox.classList.toggle("hidden", !open);
+      els.contactFieldsWrap.classList.toggle("hidden", !open);
       els.contactChevron.classList.toggle("rotate-180", open);
-      els.contactCheckIcon.classList.toggle("hidden", !open);
+      els.contactToggleCheck.classList.toggle("hidden", !open);
 
       if (open) {
-        els.contactToggleDot.classList.remove("bg-white", "border-navy-700/40");
-        els.contactToggleDot.classList.add("bg-navy-900", "border-navy-900");
+        els.contactToggleBox.classList.remove("bg-white", "border-navy-800/40");
+        els.contactToggleBox.classList.add("bg-navy-900", "border-navy-900");
       } else {
-        els.contactToggleDot.classList.add("bg-white", "border-navy-700/40");
-        els.contactToggleDot.classList.remove("bg-navy-900", "border-navy-900");
+        els.contactToggleBox.classList.add("bg-white", "border-navy-800/40");
+        els.contactToggleBox.classList.remove("bg-navy-900", "border-navy-900");
       }
     }
 
-    async function handlePatientSubmit(e) {
+    function updateSuccessTexts(rating) {
+      const t = I18N[state.lang];
+      const isLow = rating <= 3;
+      els.successTitle.textContent = isLow ? t.successTitleLow : t.successTitleHigh;
+      els.successMessage.textContent = isLow ? t.successMsgLow : t.successMsgHigh;
+      els.successFollowupNote.classList.toggle("hidden", !isLow);
+    }
+
+    async function handleFeedbackSubmit(e) {
       e.preventDefault();
+      const t = I18N[state.lang];
 
       if (state.selectedRating === 0) {
-        showToast("من فضلك اختر تقييمك بالنجوم أولاً ⭐", "error");
+        showToast(t.errNoStar, "error");
         els.ratingStatusPill.classList.add("animate-bounce");
         setTimeout(() => els.ratingStatusPill.classList.remove("animate-bounce"), 850);
         return;
       }
 
+      const commentText = els.feedbackComment.value.trim();
       const payload = {
-        rating: state.selectedRating,
-        message: els.feedbackMessage.value.trim(),
+        rating: Number(state.selectedRating),
+        comment: commentText,
         patientName: els.patientName.value.trim(),
         patientPhone: els.patientPhone.value.trim(),
-        status: "new",
-        createdAt: new Date().toISOString()
+        resolved: false,
+        createdAt: serverTimestamp()
       };
 
-      // Loading State
+      // Button loading state
       els.submitFeedbackBtn.disabled = true;
-      els.submitBtnLabel.textContent = "جاري الإرسال...";
+      els.submitBtnText.textContent = t.submittingBtn;
       els.submitBtnArrow.classList.add("hidden");
       els.submitBtnSpinner.classList.remove("hidden");
 
       try {
-        if (state.firestoreReady && state.user && state.db) {
-          await addDoc(getFeedbacksCollectionRef(), payload);
-        } else {
-          // Graceful local-memory fallback if opened without Firebase config
-          state.feedbacks.unshift({ id: "mem_" + Date.now(), ...payload });
-          renderAdminDashboard();
+        try {
+          await withTimeout(addDoc(collection(db, "feedbacks"), payload), 5500);
+          setConnectionStatus("online");
+        } catch (fbErr) {
+          console.warn("Firestore write unavailable; saving locally as fallback:", fbErr.code || fbErr.message);
+          // Fallback to local storage so the patient experience never breaks even if offline
+          const localList = readLocalJson(LOCAL_FEEDBACKS_KEY, []);
+          localList.unshift({
+            id: `local_${Date.now()}`,
+            rating: payload.rating,
+            comment: payload.comment,
+            patientName: payload.patientName,
+            patientPhone: payload.patientPhone,
+            resolved: false,
+            createdAt: new Date().toISOString(),
+            _localOnly: true
+          });
+          writeLocalJson(LOCAL_FEEDBACKS_KEY, localList);
+          setConnectionStatus(isOfflineOrUnavailableError(fbErr) ? "offline" : "permission", fbErr.code || fbErr.message);
         }
 
-        state.lastSubmittedMessage = payload.message;
-        showPostSubmissionScreen(payload.rating, payload.message);
-        showToast("تم إرسال تقييمك بنجاح!", "success");
+        state.lastSubmittedRating = payload.rating;
+        state.lastSubmittedComment = commentText;
+
+        // Refresh Google Maps link before displaying Step 2
+        els.googleMapsReviewLink.href = state.settings.googleMapsUrl || DEFAULT_GMAPS_URL;
+        updateSuccessTexts(payload.rating);
+
+        if (commentText.length > 0) {
+          els.copyCommentPreview.textContent = `"${commentText}"`;
+          els.copyCommentBtnText.textContent = t.copyBtn;
+          els.copyCommentWrap.classList.remove("hidden");
+        } else {
+          els.copyCommentWrap.classList.add("hidden");
+        }
+
+        els.stepFormContainer.classList.add("hidden");
+        els.stepSuccessContainer.classList.remove("hidden");
+        showToast(t.toastSaved, "success");
+        window.scrollTo({ top: 0, behavior: "smooth" });
       } catch (err) {
-        console.error("Failed to save feedback:", err);
-        showToast("حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى", "error");
+        console.warn("Unexpected error during submit:", err);
+        showToast(t.errSave, "error");
       } finally {
         els.submitFeedbackBtn.disabled = false;
-        els.submitBtnLabel.textContent = "إرسال التقييم";
+        els.submitBtnText.textContent = t.submitBtn;
         els.submitBtnArrow.classList.remove("hidden");
         els.submitBtnSpinner.classList.add("hidden");
       }
     }
 
-    function showPostSubmissionScreen(rating, message) {
-      const isLow = rating <= 3;
+    function copyCommentToClipboard() {
+      const t = I18N[state.lang];
+      if (!state.lastSubmittedComment) return;
 
-      els.thankYouHeading.textContent = isLow
-        ? "شكراً لصراحتك وثقتك فينا 🙏"
-        : "شكراً لك على تقييمك الرائع! 💙";
-
-      els.thankYouBody.textContent = isLow
-        ? "ملاحظتك تساعدنا نقدم لك مستوى رعاية أفضل في كل زيارة."
-        : "سعداء جداً إن جلستك اليوم كانت ممتازة، ونتمنى لك دوام الصحة والعافية مع فريق LINE UP.";
-
-      els.lowRatingBanner.classList.toggle("hidden", !isLow);
-      els.googleMapsReviewLink.href = state.settings.googleMapsUrl || DEFAULT_GMAPS_URL;
-
-      if (message && message.length > 0) {
-        els.copyNotePreview.textContent = `"${message}"`;
-        els.copyNoteWrap.classList.remove("hidden");
-      } else {
-        els.copyNoteWrap.classList.add("hidden");
-      }
-
-      els.patientFormCard.classList.add("hidden");
-      els.thankYouCard.classList.remove("hidden");
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-
-    function copyLastNote() {
-      if (!state.lastSubmittedMessage) return;
       try {
-        const temp = document.createElement("textarea");
-        temp.value = state.lastSubmittedMessage;
-        temp.style.position = "fixed";
-        temp.style.opacity = "0";
-        document.body.appendChild(temp);
-        temp.focus();
-        temp.select();
+        const tempArea = document.createElement("textarea");
+        tempArea.value = state.lastSubmittedComment;
+        tempArea.setAttribute("readonly", "");
+        tempArea.style.position = "fixed";
+        tempArea.style.opacity = "0";
+        document.body.appendChild(tempArea);
+        tempArea.focus();
+        tempArea.select();
         document.execCommand("copy");
-        document.body.removeChild(temp);
-        showToast("تم نسخ ملاحظتك! يمكنك لصقها مباشرة على Google Maps ✅", "success");
+        document.body.removeChild(tempArea);
+
+        els.copyCommentBtnText.textContent = t.copiedBtn;
+        els.copyCommentBtn.classList.add("bg-emerald-500/80");
+        showToast(t.toastCopied, "success");
+
+        setTimeout(() => {
+          els.copyCommentBtnText.textContent = I18N[state.lang].copyBtn;
+          els.copyCommentBtn.classList.remove("bg-emerald-500/80");
+        }, 2500);
       } catch (err) {
-        console.error("Copy failed:", err);
+        console.error("Clipboard copy failed:", err);
       }
     }
 
-    function resetPatientForm() {
+    function resetPatientFlow() {
       state.selectedRating = 0;
       state.hoveredRating = 0;
-      state.lastSubmittedMessage = "";
+      state.lastSubmittedRating = 0;
+      state.lastSubmittedComment = "";
       els.feedbackForm.reset();
       setContactExpanded(false);
+      els.lowRatingReassurance.classList.add("hidden");
       renderStars();
 
-      els.thankYouCard.classList.add("hidden");
-      els.patientFormCard.classList.remove("hidden");
+      els.stepSuccessContainer.classList.add("hidden");
+      els.stepFormContainer.classList.remove("hidden");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // =========================================================
-    // 7. HIDDEN ADMIN ROUTING (#admin & 5-TAP SECRET LOGO)
-    // =========================================================
-    function showView(viewName) {
-      els.patientAppView.classList.toggle("hidden", viewName !== "patient");
-      els.adminPinView.classList.toggle("hidden", viewName !== "pin");
-      els.adminDashboardView.classList.toggle("hidden", viewName !== "dashboard");
-
-      if (viewName === "pin") {
-        els.pinInput.value = "";
-        els.pinErrorMsg.classList.add("hidden");
-        setTimeout(() => els.pinInput.focus(), 100);
-      } else if (viewName === "dashboard") {
-        syncSettingsToUI();
-        renderAdminDashboard();
-        initQrCodeForPatientUrl();
+    // =====================================================================
+    // 9. HIDDEN ADMIN ACCESS (5-TAP LOGO WITHIN 2.5s OR #admin / ?admin=1)
+    // =====================================================================
+    function openAdminPinModal() {
+      if (state.adminUnlocked) {
+        openDashboardView();
+        return;
       }
+      els.pinInput.value = "";
+      els.pinErrorMsg.classList.add("hidden");
+      els.adminPinModal.classList.remove("hidden");
+      setTimeout(() => els.pinInput.focus(), 80);
+    }
+
+    function closeAdminPinModal() {
+      els.adminPinModal.classList.add("hidden");
+      stripAdminUrlMarkers();
+    }
+
+    function openDashboardView() {
+      els.adminPinModal.classList.add("hidden");
+      els.patientView.classList.add("hidden");
+      els.adminDashboardView.classList.remove("hidden");
+      syncSettingsToUI();
+      subscribeToFeedbacksRealtime();
+      initQrUrlAndRender();
       window.scrollTo({ top: 0, behavior: "instant" });
     }
 
-    function enterAdminFlow() {
-      if (state.adminUnlocked) {
-        showView("dashboard");
-      } else {
-        showView("pin");
+    function logoutFromDashboard() {
+      state.adminUnlocked = false;
+      if (state.unsubFeedbacks) {
+        state.unsubFeedbacks();
+        state.unsubFeedbacks = null;
       }
+      if (state.snapshotWatchdog) {
+        clearTimeout(state.snapshotWatchdog);
+        state.snapshotWatchdog = null;
+      }
+      els.adminDashboardView.classList.add("hidden");
+      els.patientView.classList.remove("hidden");
+      stripAdminUrlMarkers();
+      window.scrollTo({ top: 0, behavior: "instant" });
     }
 
-    function exitAdminToPatient() {
-      state.adminUnlocked = false;
-      if (window.location.hash === "#admin") {
-        try {
-          history.replaceState(null, "", window.location.pathname + window.location.search);
-        } catch (_) {
-          window.location.hash = "";
+    function stripAdminUrlMarkers() {
+      try {
+        const url = new URL(window.location.href);
+        let changed = false;
+        if (url.hash.toLowerCase() === "#admin") {
+          url.hash = "";
+          changed = true;
         }
-      }
-      showView("patient");
+        if (url.searchParams.has("admin")) {
+          url.searchParams.delete("admin");
+          changed = true;
+        }
+        if (changed) {
+          history.replaceState(null, "", url.pathname + url.search + url.hash);
+        }
+      } catch (_) {}
+    }
+
+    function checkAdminUrlTrigger() {
+      try {
+        const hasHash = window.location.hash.toLowerCase() === "#admin";
+        const params = new URLSearchParams(window.location.search);
+        const hasQuery = params.get("admin") === "1";
+        if (hasHash || hasQuery) {
+          openAdminPinModal();
+        }
+      } catch (_) {}
     }
 
     function handleSecretLogoTap() {
       const now = Date.now();
-      // Keep only taps within the last 3000ms
-      state.logoTapTimestamps = state.logoTapTimestamps.filter((ts) => now - ts <= 3000);
-      state.logoTapTimestamps.push(now);
+      state.logoTaps = state.logoTaps.filter((ts) => now - ts <= 2500);
+      state.logoTaps.push(now);
 
-      if (state.logoTapTimestamps.length >= 5) {
-        state.logoTapTimestamps = [];
-        enterAdminFlow();
+      if (state.logoTaps.length >= 5) {
+        state.logoTaps = [];
+        openAdminPinModal();
       }
     }
 
-    function checkUrlHashRoute() {
-      if (window.location.hash.toLowerCase() === "#admin") {
-        enterAdminFlow();
-      } else if (!els.patientAppView.classList.contains("hidden")) {
-        return;
-      } else {
-        showView("patient");
-      }
-    }
-
-    // =========================================================
-    // 8. ADMIN DASHBOARD: RENDERING, ACTIONS, CSV & SETTINGS
-    // =========================================================
+    // =====================================================================
+    // 10. ADMIN DASHBOARD: RENDERING, PHONE/WHATSAPP, UPDATE, DELETE, CSV
+    // =====================================================================
     function escapeHtml(str) {
       return String(str || "")
         .replace(/&/g, "&amp;")
@@ -1250,10 +1576,19 @@
         .replace(/"/g, "&quot;");
     }
 
-    function formatArabicDate(isoStr) {
+    function parseTimestamp(ts) {
+      if (!ts) return null;
+      if (typeof ts.toDate === "function") return ts.toDate();
+      if (ts.seconds) return new Date(ts.seconds * 1000);
+      const parsed = new Date(ts);
+      return isNaN(parsed.getTime()) ? null : parsed;
+    }
+
+    function formatArabicDateTime(ts) {
+      const date = parseTimestamp(ts);
+      if (!date) return "الآن";
       try {
-        const d = new Date(isoStr);
-        return d.toLocaleDateString("ar-EG", {
+        return date.toLocaleDateString("ar-EG", {
           year: "numeric",
           month: "short",
           day: "numeric",
@@ -1261,37 +1596,52 @@
           minute: "2-digit"
         });
       } catch (_) {
-        return "";
+        return date.toISOString().slice(0, 16).replace("T", " ");
       }
+    }
+
+    function formatWhatsAppLink(rawPhone) {
+      const digits = String(rawPhone || "").replace(/[^\d]/g, "");
+      if (!digits) return "";
+      // Convert standard Egyptian 11-digit mobile numbers (01XXXXXXXXX) to international 201XXXXXXXXX
+      if (digits.startsWith("01") && digits.length === 11) {
+        return `https://wa.me/2${digits}`;
+      }
+      if (digits.startsWith("00")) {
+        return `https://wa.me/${digits.slice(2)}`;
+      }
+      return `https://wa.me/${digits}`;
     }
 
     function renderAdminDashboard() {
       const list = state.feedbacks;
       const total = list.length;
       const avg = total
-        ? (list.reduce((acc, item) => acc + Number(item.rating || 0), 0) / total).toFixed(1)
+        ? (list.reduce((sum, f) => sum + Number(f.rating || 0), 0) / total).toFixed(1)
         : "0.0";
-      const fiveStarCount = list.filter((item) => Number(item.rating) === 5).length;
-      const unresolvedIssues = list.filter((item) => Number(item.rating) <= 3 && item.status !== "resolved").length;
+      const complaints = list.filter((f) => Number(f.rating) <= 3).length;
+      const pending = list.filter((f) => !f.resolved).length;
 
       els.kpiTotal.textContent = total;
       els.kpiAvg.textContent = avg;
-      els.kpiFiveStar.textContent = fiveStarCount;
-      els.kpiUnresolved.textContent = unresolvedIssues;
+      els.kpiComplaints.textContent = complaints;
+      els.kpiPending.textContent = pending;
 
-      // Apply Active Filter
+      // Apply Filter
       let filtered = list;
       if (state.activeFilter === "issues") {
-        filtered = list.filter((item) => Number(item.rating) <= 3);
+        filtered = list.filter((f) => Number(f.rating) <= 3);
       } else if (state.activeFilter === "positive") {
-        filtered = list.filter((item) => Number(item.rating) >= 4);
+        filtered = list.filter((f) => Number(f.rating) >= 4);
+      } else if (state.activeFilter === "unresolved") {
+        filtered = list.filter((f) => !f.resolved);
       }
 
       if (!filtered.length) {
         els.adminFeedbackList.innerHTML = `
           <div class="bg-white/95 rounded-2xl p-10 border border-wood-200 text-center space-y-2">
-            <p class="text-sm font-bold text-navy-900">لا توجد تقييمات في هذا القسم حالياً</p>
-            <p class="text-xs text-slate-400">ستظهر تقييمات المرضى هنا لحظياً بمجرد إرسالها</p>
+            <p class="text-sm font-bold text-navy-900">لا توجد تقييمات مطابقة لهذا الفلتر حالياً</p>
+            <p class="text-xs text-slate-400">أي تقييم جديد يُرسله مريض سيظهر هنا فوراً بدون تحديث الصفحة.</p>
           </div>
         `;
         return;
@@ -1299,53 +1649,69 @@
 
       els.adminFeedbackList.innerHTML = filtered
         .map((item) => {
-          const ratingNum = Number(item.rating || 0);
-          const isLow = ratingNum <= 3;
-          const isResolved = item.status === "resolved";
-          const starsHtml = Array.from({ length: 5 }, (_, i) =>
-            `<span class="${i < ratingNum ? "text-gold-500" : "text-slate-200"}">★</span>`
+          const rating = Number(item.rating || 0);
+          const isLow = rating <= 3;
+          const isResolved = Boolean(item.resolved);
+          const commentText = item.comment || item.message || "";
+          const starsHtml = Array.from({ length: 5 }, (_, idx) =>
+            `<span class="${idx < rating ? "text-gold-500" : "text-slate-200"}">★</span>`
           ).join("");
 
-          const statusPill = isResolved
+          const statusBadge = isResolved
             ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">✓ تمت المتابعة</span>`
             : isLow
-            ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200">● يحتاج متابعة</span>`
-            : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-navy-50 text-navy-800 border border-navy-900/10">جديد</span>`;
+            ? `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200">● شكوى / قيد المتابعة</span>`
+            : `<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-navy-50 text-navy-800 border border-navy-900/10">قيد المتابعة</span>`;
 
           const cardBorder = isLow && !isResolved ? "border-rose-200" : "border-wood-200";
-          const patientDisplay = item.patientName ? escapeHtml(item.patientName) : "مريض (بدون اسم)";
-          const phoneHtml = item.patientPhone
-            ? `<a href="tel:${escapeHtml(item.patientPhone)}" dir="ltr" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-navy-50 text-navy-900 hover:bg-navy-900 hover:text-white text-xs font-bold transition-colors">📞 ${escapeHtml(item.patientPhone)}</a>`
-            : "";
+          const patientName = item.patientName ? escapeHtml(item.patientName) : "مريض (بدون اسم)";
+
+          let contactActionsHtml = "";
+          if (item.patientPhone) {
+            const cleanTel = escapeHtml(item.patientPhone);
+            const waUrl = formatWhatsAppLink(item.patientPhone);
+            contactActionsHtml = `
+              <div class="flex flex-wrap items-center gap-1.5">
+                <a href="tel:${cleanTel}" dir="ltr" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-navy-50 text-navy-900 hover:bg-navy-900 hover:text-white text-xs font-latin font-bold transition-colors">
+                  <span>📞</span><span>${cleanTel}</span>
+                </a>
+                ${
+                  waUrl
+                    ? `<a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white border border-emerald-200/80 text-xs font-bold transition-colors">
+                        <span>واتساب</span>
+                      </a>`
+                    : ""
+                }
+              </div>
+            `;
+          }
 
           return `
             <article class="bg-white/95 rounded-2xl p-4 sm:p-5 border ${cardBorder} shadow-sm space-y-3">
-              <div class="flex flex-wrap items-start justify-between gap-2">
+              <div class="flex flex-wrap items-start justify-between gap-2.5">
                 <div class="space-y-1">
                   <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-sm font-extrabold text-navy-900">${patientDisplay}</span>
-                    ${statusPill}
+                    <span class="text-sm font-extrabold text-navy-900">${patientName}</span>
+                    ${statusBadge}
                   </div>
                   <div class="flex items-center gap-2.5">
                     <div class="text-base leading-none">${starsHtml}</div>
-                    <span class="text-[11px] text-slate-400 font-medium">${escapeHtml(formatArabicDate(item.createdAt))}</span>
+                    <span class="text-[11px] text-slate-400 font-medium">${escapeHtml(formatArabicDateTime(item.createdAt))}</span>
                   </div>
                 </div>
-                <div class="flex items-center gap-2">
-                  ${phoneHtml}
-                </div>
+                ${contactActionsHtml}
               </div>
 
               ${
-                item.message
-                  ? `<p class="text-xs sm:text-sm text-slate-700 bg-wood-50/80 border border-wood-200/60 rounded-xl p-3.5 leading-relaxed">${escapeHtml(item.message)}</p>`
-                  : `<p class="text-xs text-slate-400 italic">لم يكتب المريض ملاحظات إضافية.</p>`
+                commentText
+                  ? `<p class="text-xs sm:text-sm text-slate-700 bg-wood-50/85 border border-wood-200/70 rounded-xl p-3.5 leading-relaxed">${escapeHtml(commentText)}</p>`
+                  : `<p class="text-xs text-slate-400 italic">لم يكتب المريض ملاحظات نصية.</p>`
               }
 
-              <div class="pt-1 flex flex-wrap items-center justify-end gap-2 border-t border-wood-100">
+              <div class="pt-2 flex flex-wrap items-center justify-end gap-2 border-t border-wood-100">
                 <button
                   type="button"
-                  data-action="toggle-status"
+                  data-action="toggle-resolved"
                   data-id="${escapeHtml(item.id)}"
                   class="px-3.5 py-2 rounded-xl text-xs font-bold transition-all active:scale-95 cursor-pointer ${
                     isResolved
@@ -1353,14 +1719,13 @@
                       : "bg-emerald-600 text-white hover:bg-emerald-700"
                   }"
                 >
-                  ${isResolved ? "إعادة كـ جديد" : "✓ تمت المتابعة"}
+                  ${isResolved ? "إلغاء تمت المتابعة" : "✓ تمت المتابعة"}
                 </button>
-
                 <button
                   type="button"
                   data-action="delete"
                   data-id="${escapeHtml(item.id)}"
-                  class="px-3 py-2 rounded-xl bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white text-xs font-bold transition-all active:scale-95 cursor-pointer"
+                  class="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white text-xs font-bold transition-all active:scale-95 cursor-pointer"
                 >
                   حذف
                 </button>
@@ -1371,23 +1736,25 @@
         .join("");
     }
 
-    async function toggleFeedbackStatus(id) {
+    async function handleToggleResolved(id) {
       const target = state.feedbacks.find((f) => f.id === id);
       if (!target) return;
-      const nextStatus = target.status === "resolved" ? "new" : "resolved";
+      const nextResolved = !Boolean(target.resolved);
+
+      if (String(id).startsWith("local_") || !state.firestoreOnline) {
+        target.resolved = nextResolved;
+        writeLocalJson(LOCAL_FEEDBACKS_KEY, state.feedbacks);
+        renderAdminDashboard();
+        showToast(nextResolved ? "تم التحديد كـ تمت المتابعة ✅" : "تم التحديث إلى قيد المتابعة", "success");
+        return;
+      }
 
       try {
-        if (state.firestoreReady && state.user && state.db) {
-          const ref = doc(state.db, "artifacts", appId, "public", "data", "feedbacks", id);
-          await updateDoc(ref, { status: nextStatus });
-        } else {
-          target.status = nextStatus;
-          renderAdminDashboard();
-        }
-        showToast(nextStatus === "resolved" ? "تم تحديد التقييم كـ تمت المتابعة ✅" : "تم تحديث الحالة إلى جديد", "success");
+        await withTimeout(updateDoc(doc(db, "feedbacks", id), { resolved: nextResolved }), 5000);
+        showToast(nextResolved ? "تم التحديد كـ تمت المتابعة ✅" : "تم التحديث إلى قيد المتابعة", "success");
       } catch (err) {
-        console.error("Status toggle failed:", err);
-        showToast("تعذر تحديث الحالة", "error");
+        console.warn("Failed to update feedback:", err.code || err.message);
+        showToast("تعذر تحديث حالة التقييم في Firebase", "error");
       }
     }
 
@@ -1401,50 +1768,54 @@
       els.deleteConfirmModal.classList.add("hidden");
     }
 
-    async function confirmDeleteFeedback() {
+    async function handleConfirmDelete() {
       const id = state.pendingDeleteId;
       if (!id) return;
       closeDeleteModal();
 
+      if (String(id).startsWith("local_") || !state.firestoreOnline) {
+        state.feedbacks = state.feedbacks.filter((f) => f.id !== id);
+        writeLocalJson(LOCAL_FEEDBACKS_KEY, state.feedbacks);
+        renderAdminDashboard();
+        showToast("تم حذف التقييم بنجاح", "success");
+        return;
+      }
+
       try {
-        if (state.firestoreReady && state.user && state.db) {
-          const ref = doc(state.db, "artifacts", appId, "public", "data", "feedbacks", id);
-          await deleteDoc(ref);
-        } else {
-          state.feedbacks = state.feedbacks.filter((f) => f.id !== id);
-          renderAdminDashboard();
-        }
+        await withTimeout(deleteDoc(doc(db, "feedbacks", id)), 5000);
         showToast("تم حذف التقييم بنجاح", "success");
       } catch (err) {
-        console.error("Delete failed:", err);
-        showToast("تعذر حذف التقييم", "error");
+        console.warn("Failed to delete feedback:", err.code || err.message);
+        showToast("تعذر حذف التقييم من Firebase", "error");
       }
     }
 
-    function exportFeedbacksCSV() {
-      const headers = ["التاريخ", "التقييم", "الحالة", "اسم المريض", "رقم الموبايل", "الملاحظات"];
+    function exportCsvForExcel() {
+      const headers = ["التاريخ والوقت", "التقييم", "حالة المتابعة", "اسم المريض", "رقم الموبايل", "الملاحظات"];
       const rows = state.feedbacks.map((item) => {
+        const text = (item.comment || item.message || "").replace(/\r?\n/g, " ");
         return [
-          formatArabicDate(item.createdAt),
+          formatArabicDateTime(item.createdAt),
           item.rating || "",
-          item.status === "resolved" ? "تمت المتابعة" : "جديد",
+          item.resolved ? "تمت المتابعة" : "قيد المتابعة",
           item.patientName || "بدون اسم",
           item.patientPhone || "",
-          (item.message || "").replace(/\r?\n/g, " ")
+          text
         ]
           .map((cell) => `"${String(cell).replace(/"/g, '""')}"`)
           .join(",");
       });
 
-      const csv = "\uFEFF" + [headers.join(","), ...rows].join("\n");
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      // UTF-8 BOM ensures Arabic text renders cleanly in Microsoft Excel
+      const csvContent = "\uFEFF" + [headers.join(","), ...rows].join("\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `LINE_UP_Feedbacks_${new Date().toISOString().slice(0, 10)}.csv`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `LINE_UP_Feedbacks_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
       URL.revokeObjectURL(url);
       showToast("تم تحميل ملف Excel (CSV) بنجاح ✅", "success");
     }
@@ -1459,94 +1830,167 @@
         return;
       }
       if (!pin || pin.length < 4) {
-        showToast("الرقم السري يجب أن يكون 4 أرقام على الأقل", "error");
+        showToast("الرقم السري يجب أن يتكون من 4 أرقام على الأقل", "error");
         return;
       }
 
       els.saveSettingsBtn.disabled = true;
       els.saveSettingsBtn.textContent = "جاري الحفظ...";
 
-      try {
-        state.settings.googleMapsUrl = gmaps;
-        state.settings.adminPin = pin;
+      // Always persist locally first so changes apply immediately
+      state.settings.googleMapsUrl = gmaps;
+      state.settings.adminPin = pin;
+      writeLocalJson(LOCAL_SETTINGS_KEY, state.settings);
+      syncSettingsToUI();
 
-        if (state.firestoreReady && state.user && state.db) {
-          await setDoc(
-            getSettingsDocRef(),
-            { googleMapsUrl: gmaps, adminPin: pin, updatedAt: new Date().toISOString() },
+      try {
+        await withTimeout(
+          setDoc(
+            doc(db, "settings", "clinic"),
+            {
+              googleMapsUrl: gmaps,
+              adminPin: pin,
+              updatedAt: serverTimestamp()
+            },
             { merge: true }
-          );
-        }
-        syncSettingsToUI();
-        showToast("تم حفظ الإعدادات بنجاح ✅", "success");
+          ),
+          5000
+        );
+
+        setConnectionStatus("online");
+        showToast("تم حفظ الإعدادات في Firebase بنجاح ✅", "success");
       } catch (err) {
-        console.error("Settings save failed:", err);
-        showToast("تعذر حفظ الإعدادات", "error");
+        console.warn("Failed to save settings to Firestore:", err.code || err.message);
+        setConnectionStatus(isOfflineOrUnavailableError(err) ? "offline" : "permission", err.code || err.message);
+        showToast("تم الحفظ محلياً مؤقتاً — راجع إعدادات Firestore بالأعلى", "info");
       } finally {
         els.saveSettingsBtn.disabled = false;
-        els.saveSettingsBtn.textContent = "حفظ الإعدادات";
+        els.saveSettingsBtn.textContent = "حفظ الإعدادات في Firebase";
       }
     }
 
-    // =========================================================
-    // 9. QR CODE STANDEE GENERATOR (STRIPS #admin AUTOMATICALLY)
-    // =========================================================
-    function getCleanPatientUrl() {
+    // =====================================================================
+    // 11. QR CODE GENERATION, PRINT & HIGH-RES PNG DOWNLOAD
+    // =====================================================================
+    function getCleanPatientPageUrl() {
       try {
         if (window.location.href && window.location.href.startsWith("http")) {
-          return window.location.origin + window.location.pathname + window.location.search;
+          const u = new URL(window.location.href);
+          u.hash = "";
+          u.searchParams.delete("admin");
+          return u.toString();
         }
       } catch (_) {}
       return "https://lineup-clinic.web.app/";
     }
 
-    function initQrCodeForPatientUrl() {
+    function initQrUrlAndRender() {
       if (!els.qrTargetUrlInput.value.trim()) {
-        els.qrTargetUrlInput.value = getCleanPatientUrl();
+        els.qrTargetUrlInput.value = getCleanPatientPageUrl();
       }
-      renderQrCodes(els.qrTargetUrlInput.value.trim());
+      renderQrTargets(els.qrTargetUrlInput.value.trim());
     }
 
-    function renderQrCodes(url) {
-      const cleanUrl = (url || getCleanPatientUrl()).replace(/#admin$/i, "");
-      const boxes = [
+    function sanitizeQrUrl(raw) {
+      const fallback = getCleanPatientPageUrl();
+      if (!raw) return fallback;
+      return raw.replace(/#admin$/i, "").replace(/([?&])admin=1(&|$)/i, "$1").replace(/[?&]$/, "") || fallback;
+    }
+
+    function renderQrTargets(rawUrl) {
+      const targetUrl = sanitizeQrUrl(rawUrl);
+      const targets = [
         { el: els.qrPreviewBox, size: 170 },
         { el: els.qrPrintBox, size: 220 }
       ];
 
-      boxes.forEach(({ el, size }) => {
+      targets.forEach(({ el, size }) => {
         el.innerHTML = "";
         try {
           if (typeof QRCode !== "undefined") {
             new QRCode(el, {
-              text: cleanUrl,
+              text: targetUrl,
               width: size,
               height: size,
-              colorDark: "#0B2259",
+              colorDark: "#0B2154",
               colorLight: "#FFFFFF",
               correctLevel: QRCode.CorrectLevel.H
             });
           } else {
-            el.innerHTML = `<span class="text-xs text-slate-400">جاري تحميل مكتبة QR...</span>`;
+            el.innerHTML = '<span class="text-xs text-slate-400">جاري تحميل مولد QR...</span>';
           }
         } catch (err) {
-          console.error("QR generation failed:", err);
-          el.innerHTML = `<span class="text-xs text-rose-500">خطأ في توليد الكود</span>`;
+          console.error("QR generation error:", err);
+          el.innerHTML = '<span class="text-xs text-rose-500">تعذر توليد كود الـ QR</span>';
         }
       });
     }
 
-    // =========================================================
-    // 10. EVENT LISTENERS & BOOTSTRAP
-    // =========================================================
+    function downloadQrAsPng() {
+      const sourceCanvas = els.qrPrintBox.querySelector("canvas") || els.qrPreviewBox.querySelector("canvas");
+      const sourceImg = els.qrPrintBox.querySelector("img") || els.qrPreviewBox.querySelector("img");
+
+      const exportCanvas = document.createElement("canvas");
+      const size = 600;
+      const padding = 48;
+      exportCanvas.width = size;
+      exportCanvas.height = size;
+      const ctx = exportCanvas.getContext("2d");
+
+      // Crisp white background with quiet zone
+      ctx.fillStyle = "#FFFFFF";
+      ctx.fillRect(0, 0, size, size);
+
+      const triggerDownload = () => {
+        try {
+          const dataUrl = exportCanvas.toDataURL("image/png");
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = "LINE_UP_Clinic_QR.png";
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          showToast("تم تحميل صورة الـ QR بجودة عالية ✅", "success");
+        } catch (err) {
+          console.error("PNG download failed:", err);
+          showToast("تعذر تحميل الصورة", "error");
+        }
+      };
+
+      if (sourceCanvas) {
+        ctx.imageSmoothingEnabled = false;
+        ctx.drawImage(sourceCanvas, padding, padding, size - padding * 2, size - padding * 2);
+        triggerDownload();
+      } else if (sourceImg && sourceImg.src) {
+        const img = new Image();
+        img.onload = () => {
+          ctx.imageSmoothingEnabled = false;
+          ctx.drawImage(img, padding, padding, size - padding * 2, size - padding * 2);
+          triggerDownload();
+        };
+        img.src = sourceImg.src;
+      } else {
+        showToast("يرجى الانتظار حتى يكتمل توليد الـ QR", "error");
+      }
+    }
+
+    // =====================================================================
+    // 12. EVENT LISTENERS & INITIALIZATION
+    // =====================================================================
     function bindEvents() {
-      // Secret 5-tap logo trigger (invisible to patients)
+      // Language Toggle
+      els.langToggleBtn.addEventListener("click", () => {
+        state.lang = state.lang === "ar" ? "en" : "ar";
+        applyLanguage();
+      });
+
+      // Secret 5-tap trigger on LINE UP logo
       els.secretLogoTrigger.addEventListener("click", handleSecretLogoTap);
 
-      // URL hash listener (#admin)
-      window.addEventListener("hashchange", checkUrlHashRoute);
+      // URL Hash change listener (#admin)
+      window.addEventListener("hashchange", checkAdminUrlTrigger);
 
-      // Interactive 5-Star Rating
+      // 5-Star Rating Interactions
       els.starBtns.forEach((btn) => {
         const val = Number(btn.getAttribute("data-star"));
         btn.addEventListener("mouseenter", () => {
@@ -1560,33 +2004,41 @@
         btn.addEventListener("click", () => {
           state.selectedRating = val;
           renderStars();
-          // Auto-expand optional contact fields if rating is 1-3 stars so clinic can follow up
-          if (val <= 3 && !state.contactExpanded) {
+
+          // Auto-expand optional contact info with reassurance note for 1-3 stars
+          if (val <= 3) {
             setContactExpanded(true);
+            els.lowRatingReassurance.classList.remove("hidden");
+          } else {
+            els.lowRatingReassurance.classList.add("hidden");
           }
         });
       });
 
-      // Contact Toggle
+      // Collapsible Contact Info Toggle
       els.contactToggleBtn.addEventListener("click", () => {
         setContactExpanded(!state.contactExpanded);
       });
 
-      // Submit Patient Feedback
-      els.feedbackForm.addEventListener("submit", handlePatientSubmit);
+      // Patient Form Submit
+      els.feedbackForm.addEventListener("submit", handleFeedbackSubmit);
 
       // Post-Submission Actions
-      els.copyNoteBtn.addEventListener("click", copyLastNote);
-      els.returnHomeBtn.addEventListener("click", resetPatientForm);
+      els.copyCommentBtn.addEventListener("click", copyCommentToClipboard);
+      els.resetFormBtn.addEventListener("click", resetPatientFlow);
 
-      // PIN Login Form
-      els.pinLoginForm.addEventListener("submit", (e) => {
+      // Admin PIN Modal Events
+      els.pinLoginForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        const entered = els.pinInput.value.trim();
-        if (entered === String(state.settings.adminPin || DEFAULT_ADMIN_PIN)) {
+        // Quick non-blocking refresh (max 1.5s) so PIN login stays snappy even if offline
+        await loadClinicSettings(1500);
+        const enteredPin = els.pinInput.value.trim();
+        const validPin = String(state.settings.adminPin || DEFAULT_ADMIN_PIN);
+
+        if (enteredPin === validPin) {
           state.adminUnlocked = true;
           els.pinErrorMsg.classList.add("hidden");
-          showView("dashboard");
+          openDashboardView();
         } else {
           els.pinErrorMsg.classList.remove("hidden");
           els.pinInput.value = "";
@@ -1594,8 +2046,11 @@
         }
       });
 
-      els.cancelPinBtn.addEventListener("click", exitAdminToPatient);
-      els.backToPatientBtn.addEventListener("click", exitAdminToPatient);
+      els.closePinModalBtn.addEventListener("click", closeAdminPinModal);
+      els.pinModalBackdrop.addEventListener("click", closeAdminPinModal);
+
+      // Dashboard Logout
+      els.logoutDashboardBtn.addEventListener("click", logoutFromDashboard);
 
       // Dashboard Tabs
       els.dashTabBtns.forEach((btn) => {
@@ -1604,15 +2059,15 @@
           state.activeDashTab = targetId;
 
           els.dashTabBtns.forEach((b) => {
-            const active = b.getAttribute("data-dash-tab") === targetId;
-            b.className = active
+            const isActive = b.getAttribute("data-dash-tab") === targetId;
+            b.className = isActive
               ? "dash-tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold bg-navy-900 text-white transition-all cursor-pointer"
               : "dash-tab-btn flex-1 min-w-[140px] py-2.5 px-4 rounded-xl text-xs sm:text-sm font-bold text-navy-900 hover:bg-wood-100 transition-all cursor-pointer";
           });
 
           els.dashPanels.forEach((p) => p.classList.toggle("hidden", p.id !== targetId));
           if (targetId === "panelQr") {
-            initQrCodeForPatientUrl();
+            initQrUrlAndRender();
           }
         });
       });
@@ -1622,8 +2077,8 @@
         btn.addEventListener("click", () => {
           state.activeFilter = btn.getAttribute("data-filter");
           els.filterBtns.forEach((b) => {
-            const active = b.getAttribute("data-filter") === state.activeFilter;
-            b.className = active
+            const isActive = b.getAttribute("data-filter") === state.activeFilter;
+            b.className = isActive
               ? "fb-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-navy-900 text-white transition-all cursor-pointer"
               : "fb-filter-btn px-3.5 py-2 rounded-xl text-xs font-bold bg-wood-100 text-navy-900 hover:bg-wood-200 transition-all cursor-pointer";
           });
@@ -1631,47 +2086,48 @@
         });
       });
 
-      // Event Delegation for Feedback Card Actions (Toggle Status / Delete)
+      // Feedback List Actions (Event Delegation)
       els.adminFeedbackList.addEventListener("click", (e) => {
-        const actionBtn = e.target.closest("button[data-action]");
-        if (!actionBtn) return;
-        const action = actionBtn.getAttribute("data-action");
-        const id = actionBtn.getAttribute("data-id");
+        const btn = e.target.closest("button[data-action]");
+        if (!btn) return;
+        const action = btn.getAttribute("data-action");
+        const id = btn.getAttribute("data-id");
 
-        if (action === "toggle-status") {
-          toggleFeedbackStatus(id);
+        if (action === "toggle-resolved") {
+          handleToggleResolved(id);
         } else if (action === "delete") {
           openDeleteModal(id);
         }
       });
 
-      // Delete Confirmation Modal Events
-      els.confirmDeleteBtn.addEventListener("click", confirmDeleteFeedback);
+      // Delete Modal Confirmation
+      els.confirmDeleteBtn.addEventListener("click", handleConfirmDelete);
       els.cancelDeleteBtn.addEventListener("click", closeDeleteModal);
       els.deleteModalBackdrop.addEventListener("click", closeDeleteModal);
 
       // CSV Export
-      els.exportCsvBtn.addEventListener("click", exportFeedbacksCSV);
+      els.exportCsvBtn.addEventListener("click", exportCsvForExcel);
 
-      // QR Live Input & Print
+      // QR Live Input, Print & PNG Download
       els.qrTargetUrlInput.addEventListener("input", (e) => {
-        renderQrCodes(e.target.value.trim());
+        renderQrTargets(e.target.value.trim());
       });
-      els.printStandeeBtn.addEventListener("click", () => {
-        renderQrCodes(els.qrTargetUrlInput.value.trim());
-        setTimeout(() => window.print(), 120);
+      els.printQrCardBtn.addEventListener("click", () => {
+        renderQrTargets(els.qrTargetUrlInput.value.trim());
+        setTimeout(() => window.print(), 140);
       });
+      els.downloadQrPngBtn.addEventListener("click", downloadQrAsPng);
 
       // Save Clinic Settings
       els.settingsForm.addEventListener("submit", handleSaveSettings);
     }
 
-    // Bootstrap
+    // Bootstrap Application
     els.footerYear.textContent = new Date().getFullYear();
     bindEvents();
-    renderStars();
-    checkUrlHashRoute();
-    initFirebase();
+    applyLanguage();
+    loadClinicSettings();
+    checkAdminUrlTrigger();
   </script>
 </body>
 </html>
